@@ -17,6 +17,7 @@ const TTAConstants = {
     DATA_SOURCE: 'dataSource',
     GM_SETTINGS: 'gmSettings',
     PLAYER_SETTINGS: 'playerSettings',
+    OWNED_SETTINGS: 'ownedSettings',
     TOOLTIP_MANAGER: 'tooltipManager',
     ACTORS: 'actors',
     CLIPBOARD: 'clipboard',
@@ -36,6 +37,7 @@ const TTAConstants = {
     DATA_MANAGER_WIDTH: 600,
     DATA_MANAGER_HEIGHT: 700,
     TOOLTIP_EDITOR: `modules/${MODULE_NAME}/templates/tooltip-editor.hbs`,
+    EASY_TOOLTIP_EDITOR: `modules/${MODULE_NAME}/templates/easy-tooltip-editor.hbs`,
     TOOLTIP_EDITOR_ROW: `modules/${MODULE_NAME}/templates/tooltip-editor-row.hbs`,
     TOOLTIP_EDITOR_WIDTH: 600,
     TOOLTIP_DEFAULT_ACTOR_ID: 'default',
@@ -50,6 +52,26 @@ const TTAConstants = {
     default: 'default',
   },
   TOOLTIP_POSITIONS: ['top', 'right', 'bottom', 'left', 'overlay'],
+  DEPENDENCIES: [
+    {
+      name: 'mathjs',
+      options: {
+        scripts: 'https://cdn.jsdelivr.net/npm/mathjs@9.4.1/lib/browser/math.min.js',
+      },
+    },
+    {
+      name: 'sortablejs',
+      options: {
+        scripts: 'https://cdn.jsdelivr.net/npm/sortablejs@1.13.0/Sortable.min.js',
+      },
+    },
+    {
+      name: 'rxjs',
+      options: {
+        scripts: 'https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.6.7/rxjs.umd.min.js',
+      },
+    },
+  ],
 };
 
 function getSystemTheme() {

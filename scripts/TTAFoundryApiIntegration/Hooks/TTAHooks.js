@@ -1,7 +1,12 @@
 import { initSettings } from '../Settings/TTASettings.js';
 import { TTAConstants } from '../../TTAConstants/TTAConstants.js';
-import { debug, htmlToElement, MODULE_NAME } from '../../TTAUtils/TTAUtils.js';
+import {
+  debug, registerDependencies, htmlToElement, MODULE_NAME,
+} from '../../TTAUtils/TTAUtils.js';
 import TooltipFactory from '../../TooltipFactory.js';
+import EasyTooltipEditor from '../../apps/EasyTooltipEditor.js';
+import TooltipEditor from '../../apps/TooltipEditor.js';
+import { initState } from '../Settings/TTAStore.js';
 
 /**
  * Adds a hook handler
@@ -35,11 +40,29 @@ const HOOK_TYPE = {
 const hookHandlers = {
   initHookHandler() {
     return addHookHandler('init', HOOK_TYPE.ONCE, async () => {
+      registerDependencies(TTAConstants.DEPENDENCIES);
       initSettings();
 
       debug('Settings registered.');
       await loadTemplates(Object.values(TTAConstants.TEMPLATES));
       debug('Templates loaded.');
+    });
+  },
+  readyHookHandler() {
+    return addHookHandler('ready', HOOK_TYPE.ONCE, () => {
+      initState();
+
+      // TODO: REMOVE
+      if (game?.user?.isGM) {
+        const actorType = 'default';
+        new TooltipEditor({ actorType }, {
+          title: actorType.toUpperCase(),
+          classes: [`${MODULE_NAME}-tooltip-editor-window`],
+          id: `tooltip-editor-${actorType}`,
+        }).render(true);
+
+        new EasyTooltipEditor().render(true);
+      }
     });
   },
   canvasInitHandler() {

@@ -1,6 +1,6 @@
 {
   "name": "token-tooltip-alt",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "A module that adds a fully customizable tooltip next to the currently hovered token to show some useful information for players and DMs.",
   "main": "module.json",
   "scripts": {},
@@ -23,6 +23,7 @@
     "@types/jquery": "^3.5.5",
     "@types/mathjs": "^6.0.11",
     "@types/sortablejs": "^1.10.6",
+    "@types/rx": "^4.1.2",
     "eslint": "^7.23.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",

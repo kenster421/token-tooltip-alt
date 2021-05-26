@@ -151,6 +151,13 @@ function initSettings() {
       },
     },
     {
+      key: SETTING_KEYS.OWNED_SETTINGS,
+      settings: {
+        type: Object,
+        default: {},
+      },
+    },
+    {
       key: SETTING_KEYS.ACTORS,
       settings: {
         type: Object,

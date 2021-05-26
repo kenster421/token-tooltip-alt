@@ -93,12 +93,27 @@ function htmlToElement(html) {
   return template.content.firstChild;
 }
 
+/**
+ * Initializes all the dependencies using Dlopen
+ *
+ * @param {[*]} dependencies
+ */
+function registerDependencies(dependencies = []) {
+  dependencies.forEach((dependency) => {
+    const { name, options } = dependency;
+    Dlopen?.register?.(name, options);
+  });
+
+  Dlopen?.loadDependencies?.(dependencies.map((dependency) => dependency.name));
+}
+
 export {
   debug,
   clone,
   i18n,
   generateRandomColor,
   htmlToElement,
+  registerDependencies,
   MODULE_NAME,
   MODULE_TITLE,
 };
