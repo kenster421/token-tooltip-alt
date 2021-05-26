@@ -40,19 +40,18 @@ const HOOK_TYPE = {
 const hookHandlers = {
   initHookHandler() {
     return addHookHandler('init', HOOK_TYPE.ONCE, async () => {
-      registerDependencies(TTAConstants.DEPENDENCIES);
       initSettings();
 
       debug('Settings registered.');
       await loadTemplates(Object.values(TTAConstants.TEMPLATES));
       debug('Templates loaded.');
+
+      registerDependencies(TTAConstants.DEPENDENCIES).then(initState);
     });
   },
+  // TODO: REMOVE
   readyHookHandler() {
     return addHookHandler('ready', HOOK_TYPE.ONCE, () => {
-      initState();
-
-      // TODO: REMOVE
       if (game?.user?.isGM) {
         const actorType = 'default';
         new TooltipEditor({ actorType }, {

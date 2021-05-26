@@ -10,7 +10,6 @@ const TTAConstants = {
     FONT_SIZE: 'fontSize',
     MAX_ROWS: 'maxRows',
     USE_ACCENT_COLOR_FOR_EVERYTHING: 'useAccentColorForEverything',
-    ACCENT_COLOR: 'accentColor',
     TOKEN_DISPOSITIONS: 'tokenDispositions',
     TOOLTIP_POSITION: 'tooltipPosition',
     DARK_THEME: 'darkTheme',

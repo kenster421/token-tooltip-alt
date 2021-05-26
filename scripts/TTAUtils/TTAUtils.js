@@ -12,7 +12,7 @@ const CONSOLE_COLORS = ['background: #222; color: #bada55', 'color: #fff'];
  */
 function consoleOutput(output) {
   return [
-    `%c${MODULE_TITLE} %c|`,
+    `%c${MODULE_TITLE} (㇏(•̀ᵥᵥ•́)ノ) %c|`,
     ...CONSOLE_COLORS,
     ...output,
   ];
@@ -98,13 +98,13 @@ function htmlToElement(html) {
  *
  * @param {[*]} dependencies
  */
-function registerDependencies(dependencies = []) {
+async function registerDependencies(dependencies = []) {
   dependencies.forEach((dependency) => {
     const { name, options } = dependency;
     Dlopen?.register?.(name, options);
   });
 
-  Dlopen?.loadDependencies?.(dependencies.map((dependency) => dependency.name));
+  return Dlopen?.loadDependencies?.(dependencies.map((dependency) => dependency.name));
 }
 
 export {
