@@ -2,7 +2,6 @@ import { TTAConstants } from '../../TTAConstants/TTAConstants.js';
 import { getSetting } from './TTASettingsUtils.js';
 
 let TTAState = null;
-let TTAState$ = null;
 const watchedSettings = [
   TTAConstants.SETTING_KEYS.GM_SETTINGS,
   TTAConstants.SETTING_KEYS.PLAYER_SETTINGS,
@@ -12,27 +11,34 @@ const watchedSettings = [
   TTAConstants.SETTING_KEYS.FONT_SIZE,
 ];
 
-function getSettingsFromFoundry(settingsToAdd = watchedSettings) {
-  return settingsToAdd.reduce((obj, setting) => ({ ...obj, [setting]: getSetting(setting) }), {});
+function getSettingsFromFoundry() {
+  return watchedSettings.reduce((obj, setting) => ({ ...obj, [setting]: getSetting(setting) }), {});
 }
 
-function next(settings = TTAState) {
-  TTAState$.next(settings);
+function getSettingsSubjects() {
+  return watchedSettings.reduce((obj, setting) => ({ ...obj, [`${setting}$`]: new rxjs.Subject() }), {});
+}
+
+function next(setting) {
+  TTAState[`${setting}$`].next(TTAState[setting]);
 }
 
 function initState() {
-  TTAState = getSettingsFromFoundry();
-  TTAState$ = new rxjs.Subject();
-  next();
+  TTAState = {
+    ...getSettingsFromFoundry(),
+    ...getSettingsSubjects(),
+  };
+
+  watchedSettings.forEach(next);
 }
 
-function state$() {
-  return TTAState$;
+function state$(setting) {
+  return TTAState[`${setting}$`];
 }
 
-function mutate(mutation) {
-  TTAState = mutation({ ...TTAState });
-  next();
+function mutate(mutation, setting) {
+  TTAState[setting] = mutation({ ...TTAState[setting] });
+  next(setting);
 }
 
 export {

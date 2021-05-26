@@ -1,8 +1,5 @@
 import { TTAConstants } from '../TTAConstants/TTAConstants.js';
-import { getSetting, setSettingSync } from '../TTAFoundryApiIntegration/Settings/TTASettingsUtils.js';
-import {
-  clone, debug, generateRandomColor, MODULE_NAME,
-} from '../TTAUtils/TTAUtils.js';
+import { debug } from '../TTAUtils/TTAUtils.js';
 import { state$, mutate } from '../TTAFoundryApiIntegration/Settings/TTAStore.js';
 
 export default class EasyTooltipEditor extends FormApplication {
@@ -29,7 +26,7 @@ export default class EasyTooltipEditor extends FormApplication {
     const html = $html[0];
     const { fromEvent } = rxjs;
 
-    state$().subscribe((settings) => {
+    state$(TTAConstants.SETTING_KEYS.OWNED_SETTINGS).subscribe((settings) => {
       debug(settings);
       html.querySelector('#myTest2').innerHTML = Object.values(settings)[Object.values(settings).length - 1];
     });
@@ -38,7 +35,7 @@ export default class EasyTooltipEditor extends FormApplication {
       mutate((settings) => {
         settings[event.timeStamp] = event.timeStamp;
         return settings;
-      });
+      }, TTAConstants.SETTING_KEYS.OWNED_SETTINGS);
     });
   }
 
