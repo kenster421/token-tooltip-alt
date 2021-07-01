@@ -32,22 +32,22 @@
     {
       "lang": "en",
       "name": "English",
-      "path": "languages/en.json"
+      "path": "src/i18n/en.json"
     },
     {
       "lang": "es",
       "name": "Español",
-      "path": "languages/es.json"
+      "path": "src/i18n/es.json"
     },
     {
       "lang": "ko",
       "name": "Korean",
-      "path": "languages/ko.json"
+      "path": "src/i18n/ko.json"
     },
     {
       "lang": "ja",
       "name": "日本語",
-      "path": "languages/ja.json"
+      "path": "src/i18n/ja.json"
     }
   ],
   "media": [
