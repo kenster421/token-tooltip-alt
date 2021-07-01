@@ -1,7 +1,7 @@
 {
   "name": "token-tooltip-alt",
-  "title": "Token Tooltip Alt",
-  "description": "A module that adds a fully customizable tooltip next to the currently hovered token to show some useful information for players and DMs.",
+  "title": "Token Tooltip Next",
+  "description": "Fully customizable tooltips, now with a tooltip editor.",
   "version": "4.0.0",
   "manifestPlusVersion": "1.0.0",
   "author": "bmarian",
@@ -12,14 +12,10 @@
       "url": "https://github.com/bmarian"
     }
   ],
-  "esmodules": [
-    "scripts/TTAFoundryApiIntegration/TTAMain.js"
-  ],
-  "styles": [
-    "styles/token-tooltip-alt.css"
-  ],
-  "minimumCoreVersion": "0.7.5",
-  "compatibleCoreVersion": "0.8.3",
+  "esmodules": [ "src/TtxMain.js" ],
+  "styles": [ "src/css/ttx.css" ],
+  "minimumCoreVersion": "0.8.0",
+  "compatibleCoreVersion": "0.8.8",
   "dependencies": [
     {
       "name": "dlopen",

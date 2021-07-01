@@ -70,6 +70,20 @@ const TTAConstants = {
         scripts: 'https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.6.7/rxjs.umd.min.js',
       },
     },
+    {
+      name: 'vue',
+      options: {
+        scripts: 'https://unpkg.com/vue@3.1.2/dist/vue.global.js',
+      },
+    },
+    {
+      name: 'vuex',
+      options: {
+        scripts: 'https://unpkg.com/vuex@3.6.2/dist/vuex.js',
+        dependencies: 'vue',
+        init: () => Vue.use(Vuex),
+      },
+    },
   ],
 };
 

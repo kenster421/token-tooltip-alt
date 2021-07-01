@@ -1,6 +1,6 @@
 import { TTAConstants } from '../TTAConstants/TTAConstants.js';
-import { debug } from '../TTAUtils/TTAUtils.js';
-import { state$, mutate } from '../TTAFoundryApiIntegration/Settings/TTAStore.js';
+import { debug, MODULE_NAME } from '../TTAUtils/TTAUtils.js';
+import { mutate, state$ } from '../TTAFoundryApiIntegration/Settings/TTAStore.js';
 
 export default class EasyTooltipEditor extends FormApplication {
   static get defaultOptions() {
@@ -17,7 +17,9 @@ export default class EasyTooltipEditor extends FormApplication {
 
   // returns the data used by the tooltip-editor.hbs template
   getData(options) {
-    return {};
+    return {
+      moduleName: MODULE_NAME,
+    };
   }
 
   // add button events for the ones generated when the application is opened
@@ -28,7 +30,7 @@ export default class EasyTooltipEditor extends FormApplication {
 
     state$(TTAConstants.SETTING_KEYS.OWNED_SETTINGS).subscribe((settings) => {
       debug(settings);
-      html.querySelector('#myTest2').innerHTML = Object.values(settings)[Object.values(settings).length - 1];
+      html.querySelector('#myTest2').innerHTML = `${Object.values(settings)[Object.values(settings).length - 1]}`;
     });
 
     fromEvent(html.querySelector('#myTest'), 'click').subscribe((event) => {
