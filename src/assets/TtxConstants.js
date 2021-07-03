@@ -1,6 +1,26 @@
+import { i18n, OLD_MODULE_NAME } from '../foundry-integration/TtxFoundryUtils.js';
+
 const TTX_CONSTANTS = {
   SETTING_KEYS: {
-
+    SETTINGS_EDITOR: {
+      ID: 'SettingsEditor',
+      ICON: 'fas fa-edit',
+      RESTRICTED: false,
+      NAME() { return i18n('settings.SETTINGS_EDITOR.name'); },
+      LABEL() { return i18n('settings.SETTINGS_EDITOR.label'); },
+    },
+  },
+  TEMPLATES: {
+    SETTINGS_EDITOR: `modules/${OLD_MODULE_NAME}/src/foundry-integration/templates/ttx-settings-editor.hbs`,
+  },
+  APPS: {
+    DEFAULT_VALUES: {
+      width: 600,
+      resizable: true,
+      submitOnChange: false,
+      closeOnSubmit: false,
+      submitOnClose: false,
+    },
   },
   DEFAULT_SYSTEM: 'default',
   SYSTEM_THEME: {
@@ -23,11 +43,8 @@ const TTX_CONSTANTS = {
     {
       name: 'vuex',
       options: {
-        scripts: 'https://unpkg.com/vuex@3.6.2/dist/vuex.js',
+        scripts: 'https://unpkg.com/vuex@4.0.2/dist/vuex.global.js',
         dependencies: 'vue',
-        init: () => {
-          // TODO: Init store
-        },
       },
     },
   ],
@@ -39,5 +56,4 @@ const getSystemTheme = () => {
   return SYSTEM_THEME[systemId] || SYSTEM_THEME[DEFAULT_SYSTEM];
 };
 
-export default TTX_CONSTANTS;
 export { getSystemTheme, TTX_CONSTANTS };

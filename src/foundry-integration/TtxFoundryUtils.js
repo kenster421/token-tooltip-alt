@@ -1,3 +1,4 @@
+const OLD_MODULE_NAME = 'token-tooltip-alt';
 const MODULE_NAME = 'token-tooltip-next';
 const MODULE_TITLE = 'Token Tooltip Next';
 const CONSOLE_COLORS = ['background: #222; color: #bada55', 'color: #fff'];
@@ -19,18 +20,17 @@ const htmlToElement = (html) => {
   template.innerHTML = html.trim();
   return template.content.firstChild;
 };
-const registerDependencies = async (dependencies) => {
-  if (!Array.isArray(dependencies) || !Dlopen) return;
-
+const registerDependencies = async (dependencies = []) => {
   dependencies.forEach((dependency) => {
     const { name, options } = dependency;
     Dlopen.register?.(name, options);
   });
 
-  Dlopen.loadDependencies?.(dependencies.map((dependency) => dependency.name));
+  return Dlopen.loadDependencies?.(dependencies.map((dependency) => dependency.name));
 };
 
 export {
+  OLD_MODULE_NAME,
   MODULE_NAME,
   MODULE_TITLE,
   log,
