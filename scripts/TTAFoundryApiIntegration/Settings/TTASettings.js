@@ -118,18 +118,6 @@ function initSettings() {
         default: false,
       },
     },
-    {
-      key: SETTING_KEYS.DEBUG_OUTPUT,
-      settings: {
-        name: i18n('settings.DEBUG_OUTPUT.name'),
-        hint: i18n('settings.DEBUG_OUTPUT.hint'),
-        type: Boolean,
-        scope: 'world',
-        config: true,
-        restricted: true,
-        default: false,
-      },
-    },
   ];
   const HIDDEN_CONFIGURE_SETTINGS = [
     {

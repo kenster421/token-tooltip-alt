@@ -2,7 +2,12 @@
   "I18N.LANGUAGE": "English",
   "I18N.MAINTAINERS": "Marian#8010",
 
-  "token-tooltip-next.TokenTooltipAlt": "Token Tooltip Next",
+  "token-tooltip-next.TokenTooltipAlt": "Token Tooltip Alt",
+  "token-tooltip-next.TokenTooltipNext": "Token Tooltip Next",
+
+  "token-tooltip-next.settings.SETTINGS_EDITOR.name": "Settings editor",
+  "token-tooltip-next.settings.SETTINGS_EDITOR.label": "Settings editor",
+
 
   "token-tooltip-next.settings.TOOLTIP_POSITION.name": "Tooltip placement",
   "token-tooltip-next.settings.TOOLTIP_POSITION.hint": "Determine the tooltip's position.",

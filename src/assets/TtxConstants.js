@@ -1,13 +1,37 @@
 import { i18n, OLD_MODULE_NAME } from '../foundry-integration/TtxFoundryUtils.js';
 
 const TTX_CONSTANTS = {
-  SETTING_KEYS: {
+  SETTING: {
     SETTINGS_EDITOR: {
       ID: 'SettingsEditor',
       ICON: 'fas fa-edit',
       RESTRICTED: false,
       NAME() { return i18n('settings.SETTINGS_EDITOR.name'); },
       LABEL() { return i18n('settings.SETTINGS_EDITOR.label'); },
+    },
+    SETTINGS_EDITOR_SETTINGS: {
+      // if something is in here only show the tooltip while the button is pressed
+      SHOW_ONLY_WHILE_HOLDING_KEY: {},
+      // show tooltips for all tokens when holding ALT
+      SHOW_ALL: {},
+      // when showing all tooltips also show tooltips for hidden tokens
+      SHOW_ALL_HIDDEN: {},
+      // determines if the tooltip should use the dark theme
+      DARK_THEME: {},
+    },
+    TOOLTIP_EDITOR: {
+      // determines where the tooltip will be positioned
+      TOOLTIP_POSITION: {},
+      // between 1 and 2.5, ignored if tooltip position is overlay
+      FONT_SIZE: {},
+      // the number of items per row, default 5, max 20
+      MAX_NUMBER_OF_ITEMS_PER_ROW: {},
+      // where the data for the tooltip is taken from
+      DATA_SOURCE: {},
+      // settings set by the DM
+      GLOBAL_TOOLTIP_SETTINGS: {},
+      // settings set by the user for their owned tokens
+      OWNED_TOOLTIP_SETTINGS: {},
     },
   },
   TEMPLATES: {

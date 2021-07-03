@@ -1,6 +1,7 @@
 import { TTX_CONSTANTS } from '../assets/TtxConstants.js';
 import { registerDependencies } from './TtxFoundryUtils.js';
 import { initStore } from '../store/TtxStore.js';
+import { initSettings } from './TtxFoundrySettings.js';
 
 const HOOK_TYPE = {
   ONCE: 'once',
@@ -12,7 +13,14 @@ const addHookHandler = (hookId, hookType, callback) => Hooks[hookType](hookId, c
 const hookHandlers = {
   initHookHandler() {
     return addHookHandler('init', HOOK_TYPE.ONCE, async () => {
-      registerDependencies(TTX_CONSTANTS.DEPENDENCIES).then(initStore);
+      initSettings();
+    });
+  },
+  readyHookHandler() {
+    return addHookHandler('ready', HOOK_TYPE.ONCE, () => {
+      registerDependencies(TTX_CONSTANTS.DEPENDENCIES).then(() => {
+        initStore();
+      });
     });
   },
 };
