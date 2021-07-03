@@ -45,23 +45,24 @@ const hookHandlers = {
       debug('Settings registered.');
       await loadTemplates(Object.values(TTAConstants.TEMPLATES));
       debug('Templates loaded.');
-
-      registerDependencies(TTAConstants.DEPENDENCIES).then(initState);
     });
   },
-  // TODO: REMOVE
   readyHookHandler() {
     return addHookHandler('ready', HOOK_TYPE.ONCE, () => {
-      if (game?.user?.isGM) {
-        const actorType = 'default';
-        new TooltipEditor({ actorType }, {
-          title: actorType.toUpperCase(),
-          classes: [`${MODULE_NAME}-tooltip-editor-window`],
-          id: `tooltip-editor-${actorType}`,
-        }).render(true);
+      registerDependencies(TTAConstants.DEPENDENCIES).then(() => {
+        initState();
+        // TODO: REMOVE
+        if (game?.user?.isGM) {
+          const actorType = 'default';
+          new TooltipEditor({ actorType }, {
+            title: actorType.toUpperCase(),
+            classes: [`${MODULE_NAME}-tooltip-editor-window`],
+            id: `tooltip-editor-${actorType}`,
+          }).render(true);
 
-        new EasyTooltipEditor().render(true);
-      }
+          new EasyTooltipEditor().render(true);
+        }
+      });
     });
   },
   canvasInitHandler() {
