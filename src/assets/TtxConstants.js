@@ -10,16 +10,51 @@ const TTX_CONSTANTS = {
       LABEL() { return i18n('settings.SETTINGS_EDITOR.label'); },
     },
     SETTINGS_EDITOR_SETTINGS: {
+      TOOLTIP_EDITOR: {
+        ID: 'TooltipEditor',
+        ICON: 'fas fa-edit',
+        RESTRICTED: false,
+        TYPE: 'button',
+        NAME() { return i18n('settings.TOOLTIP_EDITOR.name'); },
+        LABEL() { return i18n('settings.TOOLTIP_EDITOR.label'); },
+      },
       // if something is in here only show the tooltip while the button is pressed
-      SHOW_ONLY_WHILE_HOLDING_KEY: {},
+      SHOW_ONLY_WHILE_HOLDING_KEY: {
+        ID: 'ShowOnlyWhileHoldingKey',
+        RESTRICTED: false,
+        TYPE: 'string',
+        FOUNDRY_TYPE: String,
+        SCOPE: 'client',
+        DEFAULT: '',
+        NAME() { return i18n('settings.SHOW_ONLY_WHILE_HOLDING_KEY.name'); },
+        HINT() { return i18n('settings.SHOW_ONLY_WHILE_HOLDING_KEY.hint'); },
+      },
       // show tooltips for all tokens when holding ALT
-      SHOW_ALL: {},
+      SHOW_ALL: {
+        ID: 'ShowAll',
+        RESTRICTED: false,
+        TYPE: 'boolean',
+        FOUNDRY_TYPE: Boolean,
+        SCOPE: 'client',
+        DEFAULT: true,
+        NAME() { return i18n('settings.SHOW_ALL.name'); },
+        HINT() { return i18n('settings.SHOW_ALL.hint'); },
+      },
       // when showing all tooltips also show tooltips for hidden tokens
-      SHOW_ALL_HIDDEN: {},
-      // determines if the tooltip should use the dark theme
-      DARK_THEME: {},
+      SHOW_ALL_HIDDEN: {
+        ID: 'ShowAllHidden',
+        RESTRICTED: true,
+        TYPE: 'boolean',
+        FOUNDRY_TYPE: Boolean,
+        SCOPE: 'world',
+        DEFAULT: false,
+        NAME() { return i18n('settings.SHOW_ALL_HIDDEN.name'); },
+        HINT() { return i18n('settings.SHOW_ALL_HIDDEN.hint'); },
+      },
     },
     TOOLTIP_EDITOR: {
+      // determines if the tooltip should use the dark theme
+      DARK_THEME: {},
       // determines where the tooltip will be positioned
       TOOLTIP_POSITION: {},
       // between 1 and 2.5, ignored if tooltip position is overlay

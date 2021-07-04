@@ -1,6 +1,6 @@
 import { TTX_CONSTANTS } from '../../assets/TtxConstants.js';
-import TtxVueSettingsEditor from '../../components/TtxVueSettingsEditor.js';
 import { MODULE_NAME } from '../TtxFoundryUtils.js';
+import TtxVueSettingsEditor from '../../components/TtxVueSettingsEditor.js';
 
 export default class TtxFoundrySettingsEditor extends FormApplication {
   static get defaultOptions() {
@@ -8,6 +8,8 @@ export default class TtxFoundrySettingsEditor extends FormApplication {
     return {
       ...super.defaultOptions,
       ...APPS.DEFAULT_VALUES,
+      width: 535,
+      resizable: false,
       template: TEMPLATES.SETTINGS_EDITOR,
     };
   }

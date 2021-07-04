@@ -12,15 +12,11 @@ const addHookHandler = (hookId, hookType, callback) => Hooks[hookType](hookId, c
 
 const hookHandlers = {
   initHookHandler() {
-    return addHookHandler('init', HOOK_TYPE.ONCE, async () => {
-      initSettings();
-    });
+    return addHookHandler('init', HOOK_TYPE.ONCE, initSettings);
   },
   readyHookHandler() {
     return addHookHandler('ready', HOOK_TYPE.ONCE, () => {
-      registerDependencies(TTX_CONSTANTS.DEPENDENCIES).then(() => {
-        initStore();
-      });
+      registerDependencies(TTX_CONSTANTS.DEPENDENCIES).then(initStore);
     });
   },
 };

@@ -10,7 +10,7 @@ const consoleTrace = (output) => {
   console.trace();
   console.groupEnd();
 };
-const log = (...output) => DEBUG ?? consoleTrace(output);
+const log = (...output) => DEBUG && consoleTrace(output);
 
 const clone = (obj) => JSON.parse(JSON.stringify(obj || null));
 const i18n = (path) => game.i18n.localize(`${MODULE_NAME}.${path}`);
@@ -29,6 +29,19 @@ const registerDependencies = async (dependencies = []) => {
   return Dlopen.loadDependencies?.(dependencies.map((dependency) => dependency.name));
 };
 
+const debounce = (fn, timeout = 300) => {
+  let timer;
+
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      log('Debounced function called');
+
+      return fn(...args);
+    }, timeout);
+  };
+};
+
 export {
   OLD_MODULE_NAME,
   MODULE_NAME,
@@ -39,4 +52,5 @@ export {
   generateRandomColor,
   htmlToElement,
   registerDependencies,
+  debounce,
 };
