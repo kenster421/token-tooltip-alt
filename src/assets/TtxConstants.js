@@ -114,13 +114,13 @@ const TTX_CONSTANTS = {
     {
       name: 'vue',
       options: {
-        scripts: 'https://unpkg.com/vue@3.1.2/dist/vue.global.js',
+        scripts: 'https://unpkg.com/vue@3.1.2/dist/vue.global.prod.js',
       },
     },
     {
       name: 'vuex',
       options: {
-        scripts: 'https://unpkg.com/vuex@4.0.2/dist/vuex.global.js',
+        scripts: 'https://unpkg.com/vuex@4.0.2/dist/vuex.global.prod.js',
         dependencies: 'vue',
       },
     },
