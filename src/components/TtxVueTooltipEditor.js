@@ -1,3 +1,4 @@
+import { log, MODULE_NAME } from '../foundry-integration/TtxFoundryUtils.js';
 import { TtxStore } from '../store/TtxStore.js';
 
 const template = () => (`
@@ -8,7 +9,24 @@ const template = () => (`
 const config = () => ({
   template: template(),
   setup() {
-    return { };
+    const { computed, ref } = Vue;
+    const store = Vuex.useStore();
+
+    const moduleName = ref(MODULE_NAME);
+    const isUserGM = computed(() => store.getters['TtxStore/isUserGM']);
+    const globalTooltipSettings = computed(() => store.getters['TtxStore/globalTooltipSettings']);
+    const ownedTooltipSettings = computed(() => store.getters['TtxStore/ownedTooltipSettings']);
+    const fieldName = (fieldId) => `${moduleName.value}.${fieldId}`;
+
+    log(globalTooltipSettings.value, ownedTooltipSettings.value);
+
+    return {
+      moduleName,
+      isUserGM,
+      fieldName,
+      globalTooltipSettings,
+      ownedTooltipSettings,
+    };
   },
 });
 

@@ -54,10 +54,37 @@ const settingsEditorSettings = () => {
   ];
 };
 
+const tooltipEditorSettings = () => {
+  const { TOOLTIP_EDITOR_SETTINGS } = TTX_CONSTANTS.SETTING;
+  const { GLOBAL_TOOLTIP_SETTINGS, OWNED_TOOLTIP_SETTINGS } = TOOLTIP_EDITOR_SETTINGS;
+
+  return [
+    {
+      key: GLOBAL_TOOLTIP_SETTINGS.ID,
+      settings: {
+        type: GLOBAL_TOOLTIP_SETTINGS.FOUNDRY_TYPE,
+        restricted: GLOBAL_TOOLTIP_SETTINGS.RESTRICTED,
+        default: GLOBAL_TOOLTIP_SETTINGS.DEFAULT,
+        scope: GLOBAL_TOOLTIP_SETTINGS.SCOPE,
+      },
+    },
+    {
+      key: OWNED_TOOLTIP_SETTINGS.ID,
+      settings: {
+        type: OWNED_TOOLTIP_SETTINGS.FOUNDRY_TYPE,
+        restricted: OWNED_TOOLTIP_SETTINGS.RESTRICTED,
+        default: OWNED_TOOLTIP_SETTINGS.DEFAULT,
+        scope: OWNED_TOOLTIP_SETTINGS.SCOPE,
+      },
+    },
+  ];
+};
+
 const initSettings = () => {
   registerSettingsEditor();
   registerSettings([
     ...settingsEditorSettings(),
+    ...tooltipEditorSettings(),
   ]);
 };
 

@@ -53,8 +53,27 @@ const TTX_CONSTANTS = {
       LABEL() { return i18n('settings.TOOLTIP_EDITOR.label'); },
       HINT() { return i18n('settings.TOOLTIP_EDITOR.hint'); },
     },
-    // TODO: REMOVE
     TOOLTIP_EDITOR_SETTINGS: {
+      GLOBAL_TOOLTIP_SETTINGS: {
+        ID: 'GlobalTooltipSettings',
+        RESTRICTED: true,
+        FOUNDRY_TYPE: Object,
+        SCOPE: 'world',
+        DEFAULT: {
+          gm: {},
+          user: {},
+          initialized: false,
+        },
+      },
+      OWNED_TOOLTIP_SETTINGS: {
+        ID: 'OwnedTooltipSettings',
+        RESTRICTED: false,
+        FOUNDRY_TYPE: Object,
+        SCOPE: 'client',
+        DEFAULT: {
+          initialized: false,
+        },
+      },
       // determines if the tooltip should use the dark theme
       DARK_THEME: {},
       // determines where the tooltip will be positioned
@@ -65,10 +84,6 @@ const TTX_CONSTANTS = {
       MAX_NUMBER_OF_ITEMS_PER_ROW: {},
       // where the data for the tooltip is taken from
       DATA_SOURCE: {},
-      // settings set by the DM
-      GLOBAL_TOOLTIP_SETTINGS: {},
-      // settings set by the user for their owned tokens
-      OWNED_TOOLTIP_SETTINGS: {},
     },
   },
   TEMPLATES: {
