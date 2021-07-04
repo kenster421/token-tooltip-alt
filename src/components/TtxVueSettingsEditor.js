@@ -1,9 +1,22 @@
 import { MODULE_NAME } from '../foundry-integration/TtxFoundryUtils.js';
 import { TTX_CONSTANTS } from '../assets/TtxConstants.js';
 import { TtxStore } from '../store/TtxStore.js';
+import TtxFoundryTooltipEditor from '../foundry-integration/apps/TtxFoundryTooltipEditor.js';
 
 const template = () => (`
   <div class="settings-list">
+    <div class="form-group submenu">
+      <label>{{ tooltipEditor.name }}</label>
+      <button 
+        type="button" 
+        :data-key="fieldName(tooltipEditor.id)"
+        @click="tooltipEditor.onClick($event)"
+      >
+          <i class="fas fa-comment-alt" />
+          <label>{{ tooltipEditor.label }}</label>
+      </button>
+      <p class="notes">{{ tooltipEditor.hint }}</p>
+    </div>
     <div 
       v-for="setting in userSettings" 
       :key="setting.name" 
@@ -36,7 +49,7 @@ const template = () => (`
 const config = () => ({
   template: template(),
   setup() {
-    const { SETTINGS_EDITOR_SETTINGS } = TTX_CONSTANTS.SETTING;
+    const { SETTINGS_EDITOR_SETTINGS, TOOLTIP_EDITOR } = TTX_CONSTANTS.SETTING;
     const { SHOW_ONLY_WHILE_HOLDING_KEY, SHOW_ALL, SHOW_ALL_HIDDEN } = SETTINGS_EDITOR_SETTINGS;
 
     const { computed, ref } = Vue;
@@ -50,6 +63,17 @@ const config = () => ({
     const moduleName = ref(MODULE_NAME);
     const fieldName = (fieldId) => `${moduleName.value}.${fieldId}`;
 
+    const tooltipEditor = ref({
+      id: TOOLTIP_EDITOR.ID,
+      icon: TOOLTIP_EDITOR.ICON,
+      RESTRICTED: TOOLTIP_EDITOR.RESTRICTED,
+      name: TOOLTIP_EDITOR.NAME(),
+      label: TOOLTIP_EDITOR.LABEL(),
+      hint: TOOLTIP_EDITOR.HINT(),
+      onClick() {
+        return new TtxFoundryTooltipEditor().render(true);
+      },
+    });
     const settings = ref([
       {
         id: SHOW_ONLY_WHILE_HOLDING_KEY.ID,
@@ -104,6 +128,7 @@ const config = () => ({
     return {
       moduleName,
       fieldName,
+      tooltipEditor,
       userSettings,
       isUserGM,
     };

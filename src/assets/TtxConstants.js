@@ -4,7 +4,7 @@ const TTX_CONSTANTS = {
   SETTING: {
     SETTINGS_EDITOR: {
       ID: 'SettingsEditor',
-      ICON: 'fas fa-edit',
+      ICON: 'fas fa-cogs',
       RESTRICTED: false,
       NAME() { return i18n('settings.SETTINGS_EDITOR.name'); },
       LABEL() { return i18n('settings.SETTINGS_EDITOR.label'); },
@@ -46,11 +46,12 @@ const TTX_CONSTANTS = {
     },
     TOOLTIP_EDITOR: {
       ID: 'TooltipEditor',
-      ICON: 'fas fa-edit',
+      ICON: 'fas fa-comment-alt',
       RESTRICTED: false,
       TYPE: 'button',
       NAME() { return i18n('settings.TOOLTIP_EDITOR.name'); },
       LABEL() { return i18n('settings.TOOLTIP_EDITOR.label'); },
+      HINT() { return i18n('settings.TOOLTIP_EDITOR.hint'); },
     },
     // TODO: REMOVE
     TOOLTIP_EDITOR_SETTINGS: {
