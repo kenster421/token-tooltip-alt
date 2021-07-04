@@ -1,10 +1,14 @@
-import { debounce, log, MODULE_NAME } from '../foundry-integration/TtxFoundryUtils.js';
+import { MODULE_NAME } from '../foundry-integration/TtxFoundryUtils.js';
 import { TTX_CONSTANTS } from '../assets/TtxConstants.js';
 import { TtxStore } from '../store/TtxStore.js';
 
 const template = () => (`
   <div class="settings-list">
-    <div v-for="setting in settings" :key="setting.name" class="form-group">
+    <div 
+      v-for="setting in userSettings" 
+      :key="setting.name" 
+      class="form-group"
+    >
       <label>{{ setting.name }}</label>
       <div class="form-fields">
         <input 
@@ -41,8 +45,11 @@ const config = () => ({
     const showOnlyWhileHoldingKey = computed(() => store.getters['TtxStore/showOnlyWhileHoldingKey']);
     const showAll = computed(() => store.getters['TtxStore/showAll']);
     const showAllHidden = computed(() => store.getters['TtxStore/showAllHidden']);
+    const isUserGM = computed(() => store.getters['TtxStore/isUserGM']);
 
     const moduleName = ref(MODULE_NAME);
+    const fieldName = (fieldId) => `${moduleName.value}.${fieldId}`;
+
     const settings = ref([
       {
         id: SHOW_ONLY_WHILE_HOLDING_KEY.ID,
@@ -90,13 +97,15 @@ const config = () => ({
         },
       },
     ]);
-
-    const fieldName = (fieldId) => `${moduleName.value}.${fieldId}`;
+    const userSettings = computed(() => settings.value.filter(
+      (userSetting) => !userSetting.restricted || (userSetting.restricted && isUserGM.value),
+    ));
 
     return {
       moduleName,
       fieldName,
-      settings,
+      userSettings,
+      isUserGM,
     };
   },
 });

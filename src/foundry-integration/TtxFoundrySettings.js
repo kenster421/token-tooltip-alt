@@ -1,12 +1,24 @@
 import { TTX_CONSTANTS } from '../assets/TtxConstants.js';
 import { OLD_MODULE_NAME } from './TtxFoundryUtils.js';
 import TtxFoundrySettingsEditor from './apps/TtxFoundrySettingsEditor.js';
+import TtxFoundryTooltipEditor from './apps/TtxFoundryTooltipEditor.js';
 
 const registerSetting = (key, data) => game.settings.register(OLD_MODULE_NAME, key, data);
 const registerSettings = (items) => {
   items.forEach((item) => registerSetting(item.key, item.settings));
 };
 const registerMenu = (key, data) => game.settings.registerMenu(OLD_MODULE_NAME, key, data);
+
+const registerTooltipEditor = () => {
+  const { TOOLTIP_EDITOR } = TTX_CONSTANTS.SETTING;
+  registerMenu(TOOLTIP_EDITOR.ID, {
+    name: TOOLTIP_EDITOR.NAME(),
+    label: TOOLTIP_EDITOR.LABEL(),
+    icon: TOOLTIP_EDITOR.ICON,
+    restricted: TOOLTIP_EDITOR.RESTRICTED,
+    type: TtxFoundryTooltipEditor,
+  });
+};
 
 const registerSettingsEditor = () => {
   const { SETTINGS_EDITOR } = TTX_CONSTANTS.SETTING;
@@ -55,6 +67,7 @@ const settingsEditorSettings = () => {
 };
 
 const initSettings = () => {
+  registerTooltipEditor();
   registerSettingsEditor();
   registerSettings([
     ...settingsEditorSettings(),

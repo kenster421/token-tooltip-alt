@@ -13,6 +13,7 @@ const initStore = () => {
         namespaced: true,
         state() {
           return {
+            isUserGM: game.user?.isGM || false,
             tooltipEditor: {
               showOnlyWhileHoldingKey: getSetting(SHOW_ONLY_WHILE_HOLDING_KEY.ID),
               showAll: getSetting(SHOW_ALL.ID),
@@ -29,6 +30,9 @@ const initStore = () => {
           },
           showAllHidden(state) {
             return state.tooltipEditor.showAllHidden;
+          },
+          isUserGM(state) {
+            return state.isUserGM;
           },
         },
         actions: {

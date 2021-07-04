@@ -10,14 +10,6 @@ const TTX_CONSTANTS = {
       LABEL() { return i18n('settings.SETTINGS_EDITOR.label'); },
     },
     SETTINGS_EDITOR_SETTINGS: {
-      TOOLTIP_EDITOR: {
-        ID: 'TooltipEditor',
-        ICON: 'fas fa-edit',
-        RESTRICTED: false,
-        TYPE: 'button',
-        NAME() { return i18n('settings.TOOLTIP_EDITOR.name'); },
-        LABEL() { return i18n('settings.TOOLTIP_EDITOR.label'); },
-      },
       // if something is in here only show the tooltip while the button is pressed
       SHOW_ONLY_WHILE_HOLDING_KEY: {
         ID: 'ShowOnlyWhileHoldingKey',
@@ -53,6 +45,15 @@ const TTX_CONSTANTS = {
       },
     },
     TOOLTIP_EDITOR: {
+      ID: 'TooltipEditor',
+      ICON: 'fas fa-edit',
+      RESTRICTED: false,
+      TYPE: 'button',
+      NAME() { return i18n('settings.TOOLTIP_EDITOR.name'); },
+      LABEL() { return i18n('settings.TOOLTIP_EDITOR.label'); },
+    },
+    // TODO: REMOVE
+    TOOLTIP_EDITOR_SETTINGS: {
       // determines if the tooltip should use the dark theme
       DARK_THEME: {},
       // determines where the tooltip will be positioned
@@ -71,6 +72,7 @@ const TTX_CONSTANTS = {
   },
   TEMPLATES: {
     SETTINGS_EDITOR: `modules/${OLD_MODULE_NAME}/src/foundry-integration/templates/ttx-settings-editor.hbs`,
+    TOOLTIP_EDITOR: `modules/${OLD_MODULE_NAME}/src/foundry-integration/templates/ttx-tooltip-editor.hbs`,
   },
   APPS: {
     DEFAULT_VALUES: {
