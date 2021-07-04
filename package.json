@@ -3,7 +3,9 @@
   "version": "4.0.0",
   "description": "A module that adds a fully customizable tooltip next to the currently hovered token to show some useful information for players and DMs.",
   "main": "module.json",
-  "scripts": {},
+  "scripts": {
+    "run-foundry": "node ../Foundry/resources/app/main.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bmarian/token-tooltip-alt.git"
