@@ -85,6 +85,15 @@ const TTX_CONSTANTS = {
       // where the data for the tooltip is taken from
       DATA_SOURCE: {},
     },
+    OTHER_SETTINGS: {
+      MODULE_VERSION: {
+        ID: 'ModuleVersion',
+        FOUNDRY_TYPE: String,
+        RESTRICTED: true,
+        SCOPE: 'world',
+        DEFAULT: '3.0.0',
+      },
+    },
   },
   TEMPLATES: {
     SETTINGS_EDITOR: `modules/${OLD_MODULE_NAME}/src/foundry-integration/templates/ttx-settings-editor.hbs`,

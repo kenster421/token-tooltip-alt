@@ -80,11 +80,28 @@ const tooltipEditorSettings = () => {
   ];
 };
 
+const otherSettings = () => {
+  const { OTHER_SETTINGS } = TTX_CONSTANTS.SETTING;
+  const { MODULE_VERSION } = OTHER_SETTINGS;
+  return [
+    {
+      key: MODULE_VERSION.ID,
+      settings: {
+        type: MODULE_VERSION.FOUNDRY_TYPE,
+        restricted: MODULE_VERSION.RESTRICTED,
+        default: MODULE_VERSION.DEFAULT,
+        scope: MODULE_VERSION.SCOPE,
+      },
+    },
+  ];
+};
+
 const initSettings = () => {
   registerSettingsEditor();
   registerSettings([
     ...settingsEditorSettings(),
     ...tooltipEditorSettings(),
+    ...otherSettings(),
   ]);
 };
 

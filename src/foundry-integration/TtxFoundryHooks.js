@@ -1,4 +1,5 @@
 import { TTX_CONSTANTS } from '../assets/TtxConstants.js';
+import { migrateToTheLatestVersion } from './migration/TtxFoundryMigration.js';
 import { registerDependencies } from './TtxFoundryUtils.js';
 import { initStore } from '../store/TtxStore.js';
 import { initSettings } from './TtxFoundrySettings.js';
@@ -15,9 +16,13 @@ const hookHandlers = {
     return addHookHandler('init', HOOK_TYPE.ONCE, initSettings);
   },
   readyHookHandler() {
-    return addHookHandler('ready', HOOK_TYPE.ONCE, () => {
-      registerDependencies(TTX_CONSTANTS.DEPENDENCIES).then(initStore);
-    });
+    return addHookHandler(
+      'ready',
+      HOOK_TYPE.ONCE,
+      () => migrateToTheLatestVersion(
+        () => registerDependencies(TTX_CONSTANTS.DEPENDENCIES).then(initStore),
+      ),
+    );
   },
 };
 

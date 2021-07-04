@@ -1,6 +1,8 @@
 const OLD_MODULE_NAME = 'token-tooltip-alt';
 const MODULE_NAME = 'token-tooltip-next';
 const MODULE_TITLE = 'Token Tooltip Next';
+const MODULE_VERSION = '4.0.0';
+
 const CONSOLE_COLORS = ['background: #222; color: #bada55', 'color: #fff'];
 const DEBUG = true;
 
@@ -46,6 +48,7 @@ export {
   OLD_MODULE_NAME,
   MODULE_NAME,
   MODULE_TITLE,
+  MODULE_VERSION,
   log,
   clone,
   i18n,
