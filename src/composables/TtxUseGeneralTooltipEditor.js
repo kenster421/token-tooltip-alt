@@ -1,6 +1,6 @@
 import { TTX_CONSTANTS } from '../assets/TtxConstants.js';
 import {
-  i18n, capitalize, MODULE_NAME, log,
+  i18n, capitalize, MODULE_NAME,
 } from '../foundry-integration/TtxFoundryUtils.js';
 
 const TtxUseGeneralTooltipEditor = ({ computed, ref }, store) => {
