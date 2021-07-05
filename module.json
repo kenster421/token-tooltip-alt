@@ -13,7 +13,7 @@
     }
   ],
   "esmodules": [ "src/TtxMain.js" ],
-  "styles": [ "src/css/ttx.css" ],
+  "styles": [ "src/css/ttx.min.css" ],
   "minimumCoreVersion": "0.8.0",
   "compatibleCoreVersion": "0.8.8",
   "dependencies": [
