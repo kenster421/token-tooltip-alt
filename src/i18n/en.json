@@ -27,19 +27,34 @@
   
   "token-tooltip-next.settings.ACTOR_TYPES.name": "Actor type",
   "token-tooltip-next.settings.ACTOR_TYPES.hint": "Pick the actor type for which you want to edit the tooltip.",
-
-
-
-
-
-
-
-
-
-
-
-
   
+  "token-tooltip-next.settings.DISPOSITIONS.name": "Actor disposition",
+  "token-tooltip-next.settings.DISPOSITIONS.hint": "Pick the actor disposition for which you want to edit the tooltip.",
+
+  "token-tooltip-next.settings.USER_TYPES.name": "User type",
+  "token-tooltip-next.settings.USER_TYPES.hint": "Pick the user type for which you want to edit the tooltip.",
+
+
+
+
+
+
+
+
+
+
+
+
+  "token-tooltip-next.settings.USER_TYPES.gamemaster": "Gamemaster",
+  "token-tooltip-next.settings.USER_TYPES.player": "Player",
+
+  "token-tooltip-next.dispositions.owned": "Owned",
+  "token-tooltip-next.dispositions.friendly": "Friendly",
+  "token-tooltip-next.dispositions.neutral": "Neutral",
+  "token-tooltip-next.dispositions.hostile": "Hostile",
+
+
+
   "token-tooltip-next.actorTypes.default": "Default",
   "token-tooltip-next.actorTypes.character": "Character",
   "token-tooltip-next.actorTypes.npc": "NPC",

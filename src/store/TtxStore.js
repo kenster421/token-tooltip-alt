@@ -1,5 +1,6 @@
 import { TTX_CONSTANTS } from '../assets/TtxConstants.js';
 import { getSetting, asyncSetSetting } from '../foundry-integration/TtxFoundrySettingsUtils.js';
+import { orderedDispositionsList } from '../foundry-integration/TtxFoundryUtils.js';
 
 let TtxStore;
 
@@ -26,6 +27,7 @@ const initStore = () => {
               globalTooltipSettings: getSetting(GLOBAL_TOOLTIP_SETTINGS.ID),
               ownedTooltipSettings: getSetting(OWNED_TOOLTIP_SETTINGS.ID),
               actorTypes: [DEFAULT_ACTOR_TYPE, ...(game.system?.entityTypes?.Actor || [])],
+              dispositions: orderedDispositionsList(),
             },
           };
         },
@@ -50,6 +52,9 @@ const initStore = () => {
           },
           actorTypes(state) {
             return state.tooltipEditor.actorTypes;
+          },
+          dispositions(state) {
+            return state.tooltipEditor.dispositions;
           },
         },
         actions: {

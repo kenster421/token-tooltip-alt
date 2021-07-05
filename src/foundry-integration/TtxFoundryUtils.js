@@ -46,6 +46,11 @@ const debounce = (fn, timeout = 300) => {
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
+const orderedDispositionsList = () => Object
+  .entries(CONST?.TOKEN_DISPOSITIONS || {})
+  .sort((d1, d2) => (d2[1] - d1[1]))
+  .map((d) => d[0].toLowerCase?.());
+
 export {
   OLD_MODULE_NAME,
   MODULE_NAME,
@@ -59,4 +64,5 @@ export {
   registerDependencies,
   debounce,
   capitalize,
+  orderedDispositionsList,
 };

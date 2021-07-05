@@ -80,6 +80,27 @@ const TTX_CONSTANTS = {
         HINT() { return i18n('settings.ACTOR_TYPES.hint'); },
       },
       DEFAULT_ACTOR_TYPE: 'default',
+      DISPOSITIONS: {
+        ID: 'Dispositions',
+        NAME() { return i18n('settings.DISPOSITIONS.name'); },
+        HINT() { return i18n('settings.DISPOSITIONS.hint'); },
+      },
+      DEFAULT_DISPOSITION: 'friendly',
+      USER_TYPES: {
+        ID: 'UserTypes',
+        NAME() { return i18n('settings.USER_TYPES.name'); },
+        HINT() { return i18n('settings.USER_TYPES.hint'); },
+        OPTIONS: [
+          {
+            value: 'gamemaster',
+            name() { return i18n('settings.USER_TYPES.gamemaster'); },
+          },
+          {
+            value: 'player',
+            name() { return i18n('settings.USER_TYPES.player'); },
+          },
+        ],
+      },
       // determines if the tooltip should use the dark theme
       DARK_THEME: {},
       // determines where the tooltip will be positioned
