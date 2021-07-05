@@ -74,6 +74,12 @@ const TTX_CONSTANTS = {
           initialized: false,
         },
       },
+      ACTOR_TYPES: {
+        ID: 'ActorTypes',
+        NAME() { return i18n('settings.ACTOR_TYPES.name'); },
+        HINT() { return i18n('settings.ACTOR_TYPES.hint'); },
+      },
+      DEFAULT_ACTOR_TYPE: 'default',
       // determines if the tooltip should use the dark theme
       DARK_THEME: {},
       // determines where the tooltip will be positioned
@@ -123,13 +129,13 @@ const TTX_CONSTANTS = {
     {
       name: 'vue',
       options: {
-        scripts: 'https://unpkg.com/vue@3.1.2/dist/vue.global.prod.js',
+        scripts: 'https://unpkg.com/vue@3.1.2/dist/vue.global.js',
       },
     },
     {
       name: 'vuex',
       options: {
-        scripts: 'https://unpkg.com/vuex@4.0.2/dist/vuex.global.prod.js',
+        scripts: 'https://unpkg.com/vuex@4.0.2/dist/vuex.global.js',
         dependencies: 'vue',
       },
     },

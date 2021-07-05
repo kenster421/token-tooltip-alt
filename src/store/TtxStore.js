@@ -6,7 +6,9 @@ let TtxStore;
 const initStore = () => {
   const { SETTINGS_EDITOR_SETTINGS, TOOLTIP_EDITOR_SETTINGS } = TTX_CONSTANTS.SETTING;
   const { SHOW_ONLY_WHILE_HOLDING_KEY, SHOW_ALL, SHOW_ALL_HIDDEN } = SETTINGS_EDITOR_SETTINGS;
-  const { GLOBAL_TOOLTIP_SETTINGS, OWNED_TOOLTIP_SETTINGS } = TOOLTIP_EDITOR_SETTINGS;
+  const {
+    GLOBAL_TOOLTIP_SETTINGS, OWNED_TOOLTIP_SETTINGS, DEFAULT_ACTOR_TYPE,
+  } = TOOLTIP_EDITOR_SETTINGS;
 
   TtxStore = Vuex.createStore({
     modules: {
@@ -23,6 +25,7 @@ const initStore = () => {
             tooltipEditor: {
               globalTooltipSettings: getSetting(GLOBAL_TOOLTIP_SETTINGS.ID),
               ownedTooltipSettings: getSetting(OWNED_TOOLTIP_SETTINGS.ID),
+              actorTypes: [DEFAULT_ACTOR_TYPE, ...(game.system?.entityTypes?.Actor || [])],
             },
           };
         },
@@ -44,6 +47,9 @@ const initStore = () => {
           },
           isUserGM(state) {
             return state.isUserGM;
+          },
+          actorTypes(state) {
+            return state.tooltipEditor.actorTypes;
           },
         },
         actions: {

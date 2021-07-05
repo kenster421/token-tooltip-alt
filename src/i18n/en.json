@@ -5,12 +5,10 @@
   "token-tooltip-next.TokenTooltipAlt": "Token Tooltip Alt",
   "token-tooltip-next.TokenTooltipNext": "Token Tooltip Next",
 
+
+
   "token-tooltip-next.settings.SETTINGS_EDITOR.name": "Settings editor",
   "token-tooltip-next.settings.SETTINGS_EDITOR.label": "Settings editor",
-
-  "token-tooltip-next.settings.TOOLTIP_EDITOR.name": "Tooltip editor",
-  "token-tooltip-next.settings.TOOLTIP_EDITOR.label": "Tooltip editor",
-  "token-tooltip-next.settings.TOOLTIP_EDITOR.hint": "Change how tooltips work.",
 
   "token-tooltip-next.settings.SHOW_ONLY_WHILE_HOLDING_KEY.name": "Show tooltip when holding",
   "token-tooltip-next.settings.SHOW_ONLY_WHILE_HOLDING_KEY.hint": "Show tooltips only if the specified key is pressed. Leave empty to show tooltips all the time.",
@@ -19,5 +17,31 @@
   "token-tooltip-next.settings.SHOW_ALL.hint": "Show tooltips for all tokens while holding the <ALT> key.",
 
   "token-tooltip-next.settings.SHOW_ALL_HIDDEN.name": "Show tooltips for all hidden tokens",
-  "token-tooltip-next.settings.SHOW_ALL_HIDDEN.hint": "Show tooltips for all hidden tokens while holding the <ALT> key."
+  "token-tooltip-next.settings.SHOW_ALL_HIDDEN.hint": "Show tooltips for all hidden tokens while holding the <ALT> key.",
+
+
+
+  "token-tooltip-next.settings.TOOLTIP_EDITOR.name": "Tooltip editor",
+  "token-tooltip-next.settings.TOOLTIP_EDITOR.label": "Tooltip editor",
+  "token-tooltip-next.settings.TOOLTIP_EDITOR.hint": "Change how tooltips work.",
+  
+  "token-tooltip-next.settings.ACTOR_TYPES.name": "Actor type",
+  "token-tooltip-next.settings.ACTOR_TYPES.hint": "Pick the actor type for which you want to edit the tooltip.",
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  "token-tooltip-next.actorTypes.default": "Default",
+  "token-tooltip-next.actorTypes.character": "Character",
+  "token-tooltip-next.actorTypes.npc": "NPC",
+  "token-tooltip-next.actorTypes.vehicle": "Vehicle"
 }

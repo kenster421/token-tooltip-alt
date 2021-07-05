@@ -1,8 +1,26 @@
-import { log, MODULE_NAME } from '../foundry-integration/TtxFoundryUtils.js';
+import TtxUseGeneralTooltipEditor from '../composables/TtxUseGeneralTooltipEditor.js';
+import { MODULE_NAME } from '../foundry-integration/TtxFoundryUtils.js';
 import { TtxStore } from '../store/TtxStore.js';
 
 const template = () => (`
-  <div class="settings-list">
+  <div :class="name('tooltip-preview-container')">
+  </div>
+  <div :class="['settings-list', name('tooltip-settings')]">
+    <div class="form-group">
+      <label>{{ actorTypeSetting.name }}</label>
+        <div class="form-fields">
+          <select v-model="selectedActorType" :name="name(actorTypeSetting.id, '.')">
+              <option 
+                v-for="(actorType, index) in actorTypeSetting.options" 
+                :key="actorType.value"
+                :value="actorType.value"
+              >
+                {{ actorType.name }}
+              </option>
+          </select>
+        </div>
+        <p class="notes">{{ actorTypeSetting.hint }}</p>
+    </div>
   </div>
 `);
 
@@ -16,16 +34,19 @@ const config = () => ({
     const isUserGM = computed(() => store.getters['TtxStore/isUserGM']);
     const globalTooltipSettings = computed(() => store.getters['TtxStore/globalTooltipSettings']);
     const ownedTooltipSettings = computed(() => store.getters['TtxStore/ownedTooltipSettings']);
-    const fieldName = (fieldId) => `${moduleName.value}.${fieldId}`;
 
-    log(globalTooltipSettings.value, ownedTooltipSettings.value);
+    const name = (originalName, separator = '-') => `${moduleName.value}${separator}${originalName}`;
+
+    const { actorTypeSetting, selectedActorType } = TtxUseGeneralTooltipEditor(Vue, store);
 
     return {
       moduleName,
       isUserGM,
-      fieldName,
+      name,
       globalTooltipSettings,
       ownedTooltipSettings,
+      actorTypeSetting,
+      selectedActorType,
     };
   },
 });

@@ -3,6 +3,7 @@ import { migrateToTheLatestVersion } from './migration/TtxFoundryMigration.js';
 import { registerDependencies } from './TtxFoundryUtils.js';
 import { initStore } from '../store/TtxStore.js';
 import { initSettings } from './TtxFoundrySettings.js';
+import TtxFoundryTooltipEditor from './apps/TtxFoundryTooltipEditor.js';
 
 const HOOK_TYPE = {
   ONCE: 'once',
@@ -20,7 +21,11 @@ const hookHandlers = {
       'ready',
       HOOK_TYPE.ONCE,
       () => migrateToTheLatestVersion(
-        () => registerDependencies(TTX_CONSTANTS.DEPENDENCIES).then(initStore),
+        () => registerDependencies(TTX_CONSTANTS.DEPENDENCIES).then(() => {
+          initStore();
+          // TODO: REMOVE
+          new TtxFoundryTooltipEditor().render(true);
+        }),
       ),
     );
   },

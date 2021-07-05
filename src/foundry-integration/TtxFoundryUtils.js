@@ -44,6 +44,8 @@ const debounce = (fn, timeout = 300) => {
   };
 };
 
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
 export {
   OLD_MODULE_NAME,
   MODULE_NAME,
@@ -56,4 +58,5 @@ export {
   htmlToElement,
   registerDependencies,
   debounce,
+  capitalize,
 };
