@@ -24,12 +24,16 @@ const TtxUseGeneralTooltipEditor = ({ computed, ref }, store) => {
     hint: ACTOR_TYPES.HINT(),
     options: formattedActorTypes.value,
   };
-  const selectedActorType = ref(DEFAULT_ACTOR_TYPE);
+  const selectedActorValue = ref(DEFAULT_ACTOR_TYPE);
+  const selectedActorName = computed(() => formattedActorTypes.value.find(
+    (actorType) => actorType.value === selectedActorValue.value,
+  ).name);
   /* === ACTOR TYPE === */
 
   return {
     actorTypeSetting,
-    selectedActorType,
+    selectedActorValue,
+    selectedActorName,
   };
 };
 

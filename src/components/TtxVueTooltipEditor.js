@@ -3,13 +3,14 @@ import { MODULE_NAME } from '../foundry-integration/TtxFoundryUtils.js';
 import { TtxStore } from '../store/TtxStore.js';
 
 const template = () => (`
+  <h1>{{ selectedActorName }}</h1>
   <div :class="name('tooltip-preview-container')">
   </div>
   <div :class="['settings-list', name('tooltip-settings')]">
     <div class="form-group">
       <label>{{ actorTypeSetting.name }}</label>
         <div class="form-fields">
-          <select v-model="selectedActorType" :name="name(actorTypeSetting.id, '.')">
+          <select v-model="selectedActorValue" :name="name(actorTypeSetting.id, '.')">
               <option 
                 v-for="(actorType, index) in actorTypeSetting.options" 
                 :key="actorType.value"
@@ -37,7 +38,9 @@ const config = () => ({
 
     const name = (originalName, separator = '-') => `${moduleName.value}${separator}${originalName}`;
 
-    const { actorTypeSetting, selectedActorType } = TtxUseGeneralTooltipEditor(Vue, store);
+    const {
+      actorTypeSetting, selectedActorValue, selectedActorName,
+    } = TtxUseGeneralTooltipEditor(Vue, store);
 
     return {
       moduleName,
@@ -46,7 +49,8 @@ const config = () => ({
       globalTooltipSettings,
       ownedTooltipSettings,
       actorTypeSetting,
-      selectedActorType,
+      selectedActorValue,
+      selectedActorName,
     };
   },
 });
