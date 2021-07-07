@@ -1,4 +1,4 @@
-import TtxUseGeneralTooltipEditor from '../composables/TtxUseGeneralTooltipEditor.js';
+import TtxUseSelectionTooltipEditor from '../composables/TtxUseSelectionTooltipEditor.js';
 import { MODULE_NAME } from '../foundry-integration/TtxFoundryUtils.js';
 import { TtxStore } from '../store/TtxStore.js';
 
@@ -82,7 +82,7 @@ const config = () => ({
       userTypeSettings,
       selectedUserTypeValue,
       selectedUserTypeName,
-    } = TtxUseGeneralTooltipEditor(Vue, store);
+    } = TtxUseSelectionTooltipEditor(Vue, store);
 
     return {
       moduleName,

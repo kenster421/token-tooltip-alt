@@ -3,10 +3,15 @@ import {
   i18n, capitalize, MODULE_NAME,
 } from '../foundry-integration/TtxFoundryUtils.js';
 
-const TtxUseGeneralTooltipEditor = ({ computed, ref }, store) => {
+const TtxUseGeneralTooltipEditor = ({ computed, ref, watch }, store) => {
   const { TOOLTIP_EDITOR_SETTINGS } = TTX_CONSTANTS.SETTING;
   const {
-    ACTOR_TYPES, DISPOSITIONS, DEFAULT_ACTOR_TYPE, DEFAULT_DISPOSITION, USER_TYPES,
+    ACTOR_TYPES,
+    DISPOSITIONS,
+    DEFAULT_ACTOR_TYPE,
+    DEFAULT_DISPOSITION,
+    USER_TYPES,
+    OWNED_DISPOSITION,
   } = TOOLTIP_EDITOR_SETTINGS;
 
   const isUserGM = computed(() => store.getters['TtxStore/isUserGM']);
@@ -19,6 +24,25 @@ const TtxUseGeneralTooltipEditor = ({ computed, ref }, store) => {
 
     return [...prev, formattedValue];
   }, []);
+
+  /* === USER_TYPE === */
+  const userTypeSettings = {
+    id: USER_TYPES.ID,
+    name: USER_TYPES.NAME(),
+    hint: USER_TYPES.HINT(),
+    options: USER_TYPES.OPTIONS.map((option) => ({ ...option, name: option.name() })),
+  };
+  const selectedUserTypeValue = ref(userTypeSettings.options[isUserGM ? 0 : 1].value);
+  const selectedUserTypeName = computed(() => userTypeSettings.options.find(
+    (userType) => userType.value === selectedUserTypeValue.value,
+  ).name);
+  const isPlayerSelected = computed(
+    () => selectedUserTypeValue.value === USER_TYPES.OPTIONS[1].value,
+  );
+  const isGamemasterSelected = computed(
+    () => selectedUserTypeValue.value === USER_TYPES.OPTIONS[0].value,
+  );
+  /* === USER_TYPE === */
 
   /* === ACTOR TYPE === */
   const actorTypes = computed(() => store.getters['TtxStore/actorTypes']);
@@ -36,33 +60,28 @@ const TtxUseGeneralTooltipEditor = ({ computed, ref }, store) => {
   /* === ACTOR TYPE === */
 
   /* === DISPOSITION === */
-  const dispositions = computed(() => store.getters['TtxStore/dispositions']);
+  const dispositions = computed(() => {
+    const foundryDispositions = store.getters['TtxStore/dispositions'];
+    return isPlayerSelected.value
+      ? [OWNED_DISPOSITION, ...foundryDispositions]
+      : foundryDispositions;
+  });
   const formattedDispositions = computed(() => formattedFoundryArray(dispositions.value, 'dispositions'));
-  const dispositionSetting = {
+  const dispositionSetting = computed(() => ({
     id: DISPOSITIONS.ID,
     name: DISPOSITIONS.NAME(),
     hint: DISPOSITIONS.HINT(),
     options: formattedDispositions.value,
-  };
+  }));
   const selectedDispositionValue = ref(DEFAULT_DISPOSITION);
   const selectedDispositionName = computed(() => formattedDispositions.value.find(
     (disposition) => disposition.value === selectedDispositionValue.value,
   ).name);
+  watch(selectedUserTypeValue, () => {
+    if (!isGamemasterSelected) return;
+    selectedDispositionValue.value = DEFAULT_DISPOSITION;
+  });
   /* === DISPOSITION === */
-
-  /* === USER_TYPE === */
-  const userTypeSettings = {
-    id: USER_TYPES.ID,
-    name: USER_TYPES.NAME(),
-    hint: USER_TYPES.HINT(),
-    options: USER_TYPES.OPTIONS.map((option) => ({ ...option, name: option.name() })),
-  };
-
-  const selectedUserTypeValue = ref(userTypeSettings.options[isUserGM ? 0 : 1].value);
-  const selectedUserTypeName = computed(() => userTypeSettings.options.find(
-    (userType) => userType.value === selectedUserTypeValue.value,
-  ).name);
-  /* === USER_TYPE === */
 
   return {
     actorTypeSetting,
@@ -76,6 +95,9 @@ const TtxUseGeneralTooltipEditor = ({ computed, ref }, store) => {
     userTypeSettings,
     selectedUserTypeValue,
     selectedUserTypeName,
+
+    isPlayerSelected,
+    isGamemasterSelected,
   };
 };
 

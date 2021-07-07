@@ -85,6 +85,7 @@ const TTX_CONSTANTS = {
         NAME() { return i18n('settings.DISPOSITIONS.name'); },
         HINT() { return i18n('settings.DISPOSITIONS.hint'); },
       },
+      OWNED_DISPOSITION: 'owned',
       DEFAULT_DISPOSITION: 'friendly',
       USER_TYPES: {
         ID: 'UserTypes',
