@@ -21,7 +21,9 @@ const registerSettingsEditor = () => {
 
 const settingsEditorSettings = () => {
   const { SETTINGS_EDITOR_SETTINGS } = TTX_CONSTANTS.SETTING;
-  const { SHOW_ONLY_WHILE_HOLDING_KEY, SHOW_ALL, SHOW_ALL_HIDDEN } = SETTINGS_EDITOR_SETTINGS;
+  const {
+    SHOW_ONLY_WHILE_HOLDING_KEY, SHOW_AFTER_DELAY, SHOW_ALL, SHOW_ALL_HIDDEN,
+  } = SETTINGS_EDITOR_SETTINGS;
 
   return [
     {
@@ -31,6 +33,15 @@ const settingsEditorSettings = () => {
         restricted: SHOW_ONLY_WHILE_HOLDING_KEY.RESTRICTED,
         default: SHOW_ONLY_WHILE_HOLDING_KEY.DEFAULT,
         scope: SHOW_ONLY_WHILE_HOLDING_KEY.SCOPE,
+      },
+    },
+    {
+      key: SHOW_AFTER_DELAY.ID,
+      settings: {
+        type: SHOW_AFTER_DELAY.FOUNDRY_TYPE,
+        restricted: SHOW_AFTER_DELAY.RESTRICTED,
+        default: SHOW_AFTER_DELAY.DEFAULT,
+        scope: SHOW_AFTER_DELAY.SCOPE,
       },
     },
     {

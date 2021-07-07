@@ -40,6 +40,14 @@ const template = () => (`
           :value="setting.value"
           @change="setting.onChange($event)"
         />
+        <input 
+          v-else-if="setting.type === 'number'" 
+          type="number" 
+          :name="fieldName(setting.id)" 
+          :data-dtype="setting.type"
+          :value="setting.value"
+          @change="setting.onChange($event)"
+        />
       </div>
       <p class="notes">{{ setting.hint }}</p>
     </div>
@@ -50,12 +58,15 @@ const config = () => ({
   template: template(),
   setup() {
     const { SETTINGS_EDITOR_SETTINGS, TOOLTIP_EDITOR } = TTX_CONSTANTS.SETTING;
-    const { SHOW_ONLY_WHILE_HOLDING_KEY, SHOW_ALL, SHOW_ALL_HIDDEN } = SETTINGS_EDITOR_SETTINGS;
+    const {
+      SHOW_ONLY_WHILE_HOLDING_KEY, SHOW_AFTER_DELAY, SHOW_ALL, SHOW_ALL_HIDDEN,
+    } = SETTINGS_EDITOR_SETTINGS;
 
     const { computed, ref } = Vue;
     const store = Vuex.useStore();
 
     const showOnlyWhileHoldingKey = computed(() => store.getters['TtxStore/showOnlyWhileHoldingKey']);
+    const showAfterDelay = computed(() => store.getters['TtxStore/showAfterDelay']);
     const showAll = computed(() => store.getters['TtxStore/showAll']);
     const showAllHidden = computed(() => store.getters['TtxStore/showAllHidden']);
     const isUserGM = computed(() => store.getters['TtxStore/isUserGM']);
@@ -88,6 +99,21 @@ const config = () => ({
           if (value === undefined) return;
 
           store.dispatch('TtxStore/setShowOnlyWhileHoldingKey', value);
+        },
+      },
+      {
+        id: SHOW_AFTER_DELAY.ID,
+        restricted: SHOW_AFTER_DELAY.RESTRICTED, // if only the GM can change it
+        scope: SHOW_AFTER_DELAY.SCOPE, // TODO: support for the scope module
+        type: SHOW_AFTER_DELAY.TYPE,
+        name: SHOW_AFTER_DELAY.NAME(),
+        hint: SHOW_AFTER_DELAY.HINT(),
+        value: showAfterDelay.value,
+        onChange(event) {
+          const value = event?.target?.value;
+          if (value === undefined) return;
+
+          store.dispatch('TtxStore/setShowAfterDelay', value);
         },
       },
       {

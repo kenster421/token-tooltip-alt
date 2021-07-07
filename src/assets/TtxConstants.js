@@ -21,6 +21,17 @@ const TTX_CONSTANTS = {
         NAME() { return i18n('settings.SHOW_ONLY_WHILE_HOLDING_KEY.name'); },
         HINT() { return i18n('settings.SHOW_ONLY_WHILE_HOLDING_KEY.hint'); },
       },
+      // how long do you have to hover on the token before showing it
+      SHOW_AFTER_DELAY: {
+        ID: 'ShowAfterDelay',
+        RESTRICTED: false,
+        TYPE: 'number',
+        FOUNDRY_TYPE: Number,
+        SCOPE: 'client',
+        DEFAULT: 0,
+        NAME() { return i18n('settings.SHOW_AFTER_DELAY.name'); },
+        HINT() { return i18n('settings.SHOW_AFTER_DELAY.hint'); },
+      },
       // show tooltips for all tokens when holding ALT
       SHOW_ALL: {
         ID: 'ShowAll',

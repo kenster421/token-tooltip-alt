@@ -2,62 +2,64 @@ import TtxUseSelectionTooltipEditor from '../composables/TtxUseSelectionTooltipE
 import { MODULE_NAME } from '../foundry-integration/TtxFoundryUtils.js';
 import { TtxStore } from '../store/TtxStore.js';
 
-const template = () => (`
-  <h1>{{ selectedUserTypeName }} - {{ selectedActorName }} - {{ selectedDispositionName }}</h1>
-  <div :class="name('tooltip-preview-container')">
+const selectionTemplate = () => `
+  <div class="form-group">
+  <label>{{ userTypeSettings.name }}</label>
+  <div class="form-fields">
+    <select v-model="selectedUserTypeValue" :name="name(userTypeSettings.id, '.')">
+        <option 
+          v-for="(userType, index) in userTypeSettings.options" 
+          :key="userType.value"
+          :value="userType.value"
+        >
+          {{ userType.name }}
+        </option>
+    </select>
   </div>
-  <div :class="['settings-list', name('tooltip-settings')]">
+  <p class="notes">{{ userTypeSettings.hint }}</p>
+  </div>
 
   <div class="form-group">
-    <label>{{ userTypeSettings.name }}</label>
+  <label>{{ actorTypeSetting.name }}</label>
     <div class="form-fields">
-      <select v-model="selectedUserTypeValue" :name="name(userTypeSettings.id, '.')">
+      <select v-model="selectedActorValue" :name="name(actorTypeSetting.id, '.')">
           <option 
-            v-for="(userType, index) in userTypeSettings.options" 
-            :key="userType.value"
-            :value="userType.value"
+            v-for="(actorType, index) in actorTypeSetting.options" 
+            :key="actorType.value"
+            :value="actorType.value"
           >
-            {{ userType.name }}
+            {{ actorType.name }}
           </option>
       </select>
     </div>
-    <p class="notes">{{ userTypeSettings.hint }}</p>
+    <p class="notes">{{ actorTypeSetting.hint }}</p>
   </div>
 
-    <div class="form-group">
-      <label>{{ actorTypeSetting.name }}</label>
-        <div class="form-fields">
-          <select v-model="selectedActorValue" :name="name(actorTypeSetting.id, '.')">
-              <option 
-                v-for="(actorType, index) in actorTypeSetting.options" 
-                :key="actorType.value"
-                :value="actorType.value"
-              >
-                {{ actorType.name }}
-              </option>
-          </select>
-        </div>
-        <p class="notes">{{ actorTypeSetting.hint }}</p>
-    </div>
-
-    <div class="form-group">
-      <label>{{ dispositionSetting.name }}</label>
-      <div class="form-fields">
-        <select v-model="selectedDispositionValue" :name="name(dispositionSetting.id, '.')">
-            <option 
-              v-for="(disposition, index) in dispositionSetting.options" 
-              :key="disposition.value"
-              :value="disposition.value"
-            >
-              {{ disposition.name }}
-            </option>
-        </select>
-      </div>
-      <p class="notes">{{ dispositionSetting.hint }}</p>
-    </div>
-
+  <div class="form-group">
+  <label>{{ dispositionSetting.name }}</label>
+  <div class="form-fields">
+    <select v-model="selectedDispositionValue" :name="name(dispositionSetting.id, '.')">
+        <option 
+          v-for="(disposition, index) in dispositionSetting.options" 
+          :key="disposition.value"
+          :value="disposition.value"
+        >
+          {{ disposition.name }}
+        </option>
+    </select>
   </div>
-`);
+  <p class="notes">{{ dispositionSetting.hint }}</p>
+  </div>
+`;
+
+const template = () => `
+  <h1>{{ selectionNames }}</h1>
+  <div :class="name('tooltip-preview-container')">
+  </div>
+  <div :class="['settings-list', name('tooltip-settings')]">
+    ${selectionTemplate()}
+  </div>
+`;
 
 const config = () => ({
   template: template(),
@@ -84,6 +86,8 @@ const config = () => ({
       selectedUserTypeName,
     } = TtxUseSelectionTooltipEditor(Vue, store);
 
+    const selectionNames = computed(() => `${selectedUserTypeName.value} - ${selectedActorName.value} - ${selectedDispositionName.value}`);
+
     return {
       moduleName,
       isUserGM,
@@ -93,15 +97,14 @@ const config = () => ({
 
       actorTypeSetting,
       selectedActorValue,
-      selectedActorName,
 
       dispositionSetting,
       selectedDispositionValue,
-      selectedDispositionName,
 
       userTypeSettings,
       selectedUserTypeValue,
-      selectedUserTypeName,
+
+      selectionNames,
     };
   },
 });

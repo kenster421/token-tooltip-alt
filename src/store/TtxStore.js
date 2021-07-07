@@ -6,7 +6,9 @@ let TtxStore;
 
 const initStore = () => {
   const { SETTINGS_EDITOR_SETTINGS, TOOLTIP_EDITOR_SETTINGS } = TTX_CONSTANTS.SETTING;
-  const { SHOW_ONLY_WHILE_HOLDING_KEY, SHOW_ALL, SHOW_ALL_HIDDEN } = SETTINGS_EDITOR_SETTINGS;
+  const {
+    SHOW_ONLY_WHILE_HOLDING_KEY, SHOW_AFTER_DELAY, SHOW_ALL, SHOW_ALL_HIDDEN,
+  } = SETTINGS_EDITOR_SETTINGS;
   const {
     GLOBAL_TOOLTIP_SETTINGS, OWNED_TOOLTIP_SETTINGS, DEFAULT_ACTOR_TYPE,
   } = TOOLTIP_EDITOR_SETTINGS;
@@ -20,6 +22,7 @@ const initStore = () => {
             isUserGM: game.user?.isGM || false,
             settingsEditor: {
               showOnlyWhileHoldingKey: getSetting(SHOW_ONLY_WHILE_HOLDING_KEY.ID),
+              showAfterDelay: getSetting(SHOW_AFTER_DELAY.ID),
               showAll: getSetting(SHOW_ALL.ID),
               showAllHidden: getSetting(SHOW_ALL_HIDDEN.ID),
             },
@@ -34,6 +37,9 @@ const initStore = () => {
         getters: {
           showOnlyWhileHoldingKey(state) {
             return state.settingsEditor.showOnlyWhileHoldingKey;
+          },
+          showAfterDelay(state) {
+            return state.settingsEditor.showAfterDelay;
           },
           showAll(state) {
             return state.settingsEditor.showAll;
@@ -61,6 +67,9 @@ const initStore = () => {
           setShowOnlyWhileHoldingKey({ commit }, showOnlyWhileHoldingKey) {
             return commit('SET_SHOW_ONLY_WHILE_HOLDING_KEY', showOnlyWhileHoldingKey);
           },
+          setShowAfterDelay({ commit }, showAfterDelay) {
+            return commit('SHOW_AFTER_DELAY', showAfterDelay);
+          },
           setShowAll({ commit }, showAll) {
             return commit('SET_SHOW_ALL', showAll);
           },
@@ -79,6 +88,12 @@ const initStore = () => {
             asyncSetSetting(SHOW_ONLY_WHILE_HOLDING_KEY.ID, showOnlyWhileHoldingKey)
               .then(() => {
                 state.settingsEditor.showOnlyWhileHoldingKey = showOnlyWhileHoldingKey;
+              });
+          },
+          SHOW_AFTER_DELAY(state, showAfterDelay) {
+            asyncSetSetting(SHOW_AFTER_DELAY.ID, showAfterDelay)
+              .then(() => {
+                state.settingsEditor.showAfterDelay = showAfterDelay;
               });
           },
           SET_SHOW_ALL(state, showAll) {

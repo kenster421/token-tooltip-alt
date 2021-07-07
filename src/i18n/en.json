@@ -13,6 +13,9 @@
   "token-tooltip-next.settings.SHOW_ONLY_WHILE_HOLDING_KEY.name": "Show tooltip when holding",
   "token-tooltip-next.settings.SHOW_ONLY_WHILE_HOLDING_KEY.hint": "Show tooltips only if the specified key is pressed. Leave empty to show tooltips all the time.",
 
+  "token-tooltip-next.settings.SHOW_AFTER_DELAY.name": "Show tooltip after N ms",
+  "token-tooltip-next.settings.SHOW_AFTER_DELAY.hint": "Show tooltips after you hover N ms over the token.",
+
   "token-tooltip-next.settings.SHOW_ALL.name": "Show tooltips for all tokens",
   "token-tooltip-next.settings.SHOW_ALL.hint": "Show tooltips for all tokens while holding the <ALT> key.",
 
