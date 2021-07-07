@@ -3,19 +3,19 @@ import { TTX_CONSTANTS } from '../assets/TtxConstants.js';
 import { TtxStore } from '../store/TtxStore.js';
 import TtxFoundryTooltipEditor from '../foundry-integration/apps/TtxFoundryTooltipEditor.js';
 
-const template = () => (`
+const template = () => /* html */`
   <div class="settings-list">
     <div class="form-group submenu">
       <label>{{ tooltipEditor.name }}</label>
       <button 
         type="button" 
-        :data-key="fieldName(tooltipEditor.id)"
+        :data-key="name(tooltipEditor.id, '.')"
         @click="tooltipEditor.onClick($event)"
       >
           <i class="fas fa-comment-alt" />
           <label>{{ tooltipEditor.label }}</label>
       </button>
-      <p class="notes">{{ tooltipEditor.hint }}</p>
+      <p v-if="showHints" class="notes">{{ tooltipEditor.hint }}</p>
     </div>
     <div 
       v-for="setting in userSettings" 
@@ -27,7 +27,7 @@ const template = () => (`
         <input 
           v-if="setting.type === 'boolean'" 
           type="checkbox" 
-          :name="fieldName(setting.id)" 
+          :name="name(setting.id, '.')" 
           :data-dtype="setting.type"
           :checked="setting.value"
           @change="setting.onChange($event)"
@@ -35,7 +35,7 @@ const template = () => (`
         <input 
           v-else-if="setting.type === 'string'" 
           type="text" 
-          :name="fieldName(setting.id)" 
+          :name="name(setting.id, '.')" 
           :data-dtype="setting.type"
           :value="setting.value"
           @change="setting.onChange($event)"
@@ -43,28 +43,33 @@ const template = () => (`
         <input 
           v-else-if="setting.type === 'number'" 
           type="number" 
-          :name="fieldName(setting.id)" 
+          :name="name(setting.id, '.')" 
           :data-dtype="setting.type"
           :value="setting.value"
           @change="setting.onChange($event)"
         />
       </div>
-      <p class="notes">{{ setting.hint }}</p>
+      <p v-if="showHints" class="notes">{{ setting.hint }}</p>
     </div>
   </div>
-`);
+`;
 
 const config = () => ({
   template: template(),
   setup() {
     const { SETTINGS_EDITOR_SETTINGS, TOOLTIP_EDITOR } = TTX_CONSTANTS.SETTING;
     const {
-      SHOW_ONLY_WHILE_HOLDING_KEY, SHOW_AFTER_DELAY, SHOW_ALL, SHOW_ALL_HIDDEN,
+      SHOW_HINTS,
+      SHOW_ONLY_WHILE_HOLDING_KEY,
+      SHOW_AFTER_DELAY,
+      SHOW_ALL,
+      SHOW_ALL_HIDDEN,
     } = SETTINGS_EDITOR_SETTINGS;
 
     const { computed, ref } = Vue;
     const store = Vuex.useStore();
 
+    const showHints = computed(() => store.getters['TtxStore/showHints']);
     const showOnlyWhileHoldingKey = computed(() => store.getters['TtxStore/showOnlyWhileHoldingKey']);
     const showAfterDelay = computed(() => store.getters['TtxStore/showAfterDelay']);
     const showAll = computed(() => store.getters['TtxStore/showAll']);
@@ -72,7 +77,7 @@ const config = () => ({
     const isUserGM = computed(() => store.getters['TtxStore/isUserGM']);
 
     const moduleName = ref(MODULE_NAME);
-    const fieldName = (fieldId) => `${moduleName.value}.${fieldId}`;
+    const name = (originalName, separator = '-') => `${moduleName.value}${separator}${originalName}`;
 
     const tooltipEditor = ref({
       id: TOOLTIP_EDITOR.ID,
@@ -86,6 +91,21 @@ const config = () => ({
       },
     });
     const settings = ref([
+      {
+        id: SHOW_HINTS.ID,
+        restricted: SHOW_HINTS.RESTRICTED, // if only the GM can change it
+        scope: SHOW_HINTS.SCOPE, // TODO: support for the scope module
+        type: SHOW_HINTS.TYPE,
+        name: SHOW_HINTS.NAME(),
+        hint: SHOW_HINTS.HINT(),
+        value: showHints.value,
+        onChange(event) {
+          const value = event?.target?.checked;
+          if (value === undefined) return;
+
+          store.dispatch('TtxStore/setShowHints', value);
+        },
+      },
       {
         id: SHOW_ONLY_WHILE_HOLDING_KEY.ID,
         restricted: SHOW_ONLY_WHILE_HOLDING_KEY.RESTRICTED, // if only the GM can change it
@@ -152,8 +172,9 @@ const config = () => ({
     ));
 
     return {
+      showHints,
       moduleName,
-      fieldName,
+      name,
       tooltipEditor,
       userSettings,
       isUserGM,

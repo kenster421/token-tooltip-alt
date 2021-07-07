@@ -8,7 +8,6 @@ export default class TtxFoundryTooltipEditor extends FormApplication {
     return {
       ...super.defaultOptions,
       ...APPS.DEFAULT_VALUES,
-      resizable: false,
       template: TEMPLATES.TOOLTIP_EDITOR,
       id: `${MODULE_NAME}-tooltip-editor-app`,
     };

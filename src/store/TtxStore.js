@@ -7,7 +7,7 @@ let TtxStore;
 const initStore = () => {
   const { SETTINGS_EDITOR_SETTINGS, TOOLTIP_EDITOR_SETTINGS } = TTX_CONSTANTS.SETTING;
   const {
-    SHOW_ONLY_WHILE_HOLDING_KEY, SHOW_AFTER_DELAY, SHOW_ALL, SHOW_ALL_HIDDEN,
+    SHOW_HINTS, SHOW_ONLY_WHILE_HOLDING_KEY, SHOW_AFTER_DELAY, SHOW_ALL, SHOW_ALL_HIDDEN,
   } = SETTINGS_EDITOR_SETTINGS;
   const {
     GLOBAL_TOOLTIP_SETTINGS, OWNED_TOOLTIP_SETTINGS, DEFAULT_ACTOR_TYPE,
@@ -21,6 +21,7 @@ const initStore = () => {
           return {
             isUserGM: game.user?.isGM || false,
             settingsEditor: {
+              showHints: getSetting(SHOW_HINTS.ID),
               showOnlyWhileHoldingKey: getSetting(SHOW_ONLY_WHILE_HOLDING_KEY.ID),
               showAfterDelay: getSetting(SHOW_AFTER_DELAY.ID),
               showAll: getSetting(SHOW_ALL.ID),
@@ -35,6 +36,9 @@ const initStore = () => {
           };
         },
         getters: {
+          showHints(state) {
+            return state.settingsEditor.showHints;
+          },
           showOnlyWhileHoldingKey(state) {
             return state.settingsEditor.showOnlyWhileHoldingKey;
           },
@@ -64,53 +68,56 @@ const initStore = () => {
           },
         },
         actions: {
+          setShowHints({ commit }, showHints) {
+            asyncSetSetting(SHOW_HINTS.ID, showHints)
+              .then(() => commit('SET_SHOW_HINTS', showHints));
+          },
           setShowOnlyWhileHoldingKey({ commit }, showOnlyWhileHoldingKey) {
-            return commit('SET_SHOW_ONLY_WHILE_HOLDING_KEY', showOnlyWhileHoldingKey);
+            asyncSetSetting(SHOW_ONLY_WHILE_HOLDING_KEY.ID, showOnlyWhileHoldingKey)
+              .then(() => commit('SET_SHOW_ONLY_WHILE_HOLDING_KEY', showOnlyWhileHoldingKey));
           },
           setShowAfterDelay({ commit }, showAfterDelay) {
-            return commit('SHOW_AFTER_DELAY', showAfterDelay);
+            asyncSetSetting(SHOW_AFTER_DELAY.ID, showAfterDelay)
+              .then(() => commit('SHOW_AFTER_DELAY', showAfterDelay));
           },
           setShowAll({ commit }, showAll) {
-            return commit('SET_SHOW_ALL', showAll);
+            asyncSetSetting(SHOW_ALL.ID, showAll)
+              .then(() => commit('SET_SHOW_ALL', showAll));
           },
           setShowAllHidden({ commit }, showAllHidden) {
-            return commit('SET_SHOW_ALL', showAllHidden);
+            asyncSetSetting(SHOW_ALL_HIDDEN.ID, showAllHidden)
+              .then(() => commit('SET_SHOW_ALL', showAllHidden));
           },
           setGlobalTooltipSettings({ commit }, globalTooltipSettings) {
-            return commit('SET_GLOBAL_TOOLTIP_SETTINGS', globalTooltipSettings);
+            asyncSetSetting(GLOBAL_TOOLTIP_SETTINGS.ID, globalTooltipSettings)
+              .then(() => commit('SET_GLOBAL_TOOLTIP_SETTINGS', globalTooltipSettings));
           },
           setOwnedTooltipSettings({ commit }, ownedTooltipSettings) {
-            return commit('SET_OWNED_TOOLTIP_SETTINGS', ownedTooltipSettings);
+            asyncSetSetting(OWNED_TOOLTIP_SETTINGS.ID, ownedTooltipSettings)
+              .then(() => commit('SET_OWNED_TOOLTIP_SETTINGS', ownedTooltipSettings));
           },
         },
         mutations: {
+          SET_SHOW_HINTS(state, showHints) {
+            state.settingsEditor.showHints = showHints;
+          },
           SET_SHOW_ONLY_WHILE_HOLDING_KEY(state, showOnlyWhileHoldingKey) {
-            asyncSetSetting(SHOW_ONLY_WHILE_HOLDING_KEY.ID, showOnlyWhileHoldingKey)
-              .then(() => {
-                state.settingsEditor.showOnlyWhileHoldingKey = showOnlyWhileHoldingKey;
-              });
+            state.settingsEditor.showOnlyWhileHoldingKey = showOnlyWhileHoldingKey;
           },
           SHOW_AFTER_DELAY(state, showAfterDelay) {
-            asyncSetSetting(SHOW_AFTER_DELAY.ID, showAfterDelay)
-              .then(() => {
-                state.settingsEditor.showAfterDelay = showAfterDelay;
-              });
+            state.settingsEditor.showAfterDelay = showAfterDelay;
           },
           SET_SHOW_ALL(state, showAll) {
-            asyncSetSetting(SHOW_ALL.ID, showAll)
-              .then(() => { state.settingsEditor.showAll = showAll; });
+            state.settingsEditor.showAll = showAll;
           },
           SET_SHOW_ALL_HIDDEN(state, showAllHidden) {
-            asyncSetSetting(SHOW_ALL_HIDDEN.ID, showAllHidden)
-              .then(() => { state.settingsEditor.showAllHidden = showAllHidden; });
+            state.settingsEditor.showAllHidden = showAllHidden;
           },
           SET_GLOBAL_TOOLTIP_SETTINGS(state, globalTooltipSettings) {
-            asyncSetSetting(GLOBAL_TOOLTIP_SETTINGS.ID, globalTooltipSettings)
-              .then(() => { state.tooltipEditor.globalTooltipSettings = globalTooltipSettings; });
+            state.tooltipEditor.globalTooltipSettings = globalTooltipSettings;
           },
           SET_OWNED_TOOLTIP_SETTINGS(state, ownedTooltipSettings) {
-            asyncSetSetting(OWNED_TOOLTIP_SETTINGS.ID, ownedTooltipSettings)
-              .then(() => { state.tooltipEditor.ownedTooltipSettings = ownedTooltipSettings; });
+            state.tooltipEditor.ownedTooltipSettings = ownedTooltipSettings;
           },
         },
       },

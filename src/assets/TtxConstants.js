@@ -10,6 +10,17 @@ const TTX_CONSTANTS = {
       LABEL() { return i18n('settings.SETTINGS_EDITOR.label'); },
     },
     SETTINGS_EDITOR_SETTINGS: {
+      // if to show hints or not, makes the settings more compact
+      SHOW_HINTS: {
+        ID: 'ShowHints',
+        RESTRICTED: false,
+        TYPE: 'boolean',
+        FOUNDRY_TYPE: Boolean,
+        SCOPE: 'client',
+        DEFAULT: true,
+        NAME() { return i18n('settings.SHOW_HINTS.name'); },
+        HINT() { return i18n('settings.SHOW_HINTS.hint'); },
+      },
       // if something is in here only show the tooltip while the button is pressed
       SHOW_ONLY_WHILE_HOLDING_KEY: {
         ID: 'ShowOnlyWhileHoldingKey',

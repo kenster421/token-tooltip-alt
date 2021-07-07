@@ -26,14 +26,14 @@ const TtxUseGeneralTooltipEditor = ({ computed, ref, watch }, store) => {
   }, []);
 
   /* === USER_TYPE === */
-  const userTypeSettings = {
+  const userTypeSettings = ref({
     id: USER_TYPES.ID,
     name: USER_TYPES.NAME(),
     hint: USER_TYPES.HINT(),
     options: USER_TYPES.OPTIONS.map((option) => ({ ...option, name: option.name() })),
-  };
-  const selectedUserTypeValue = ref(userTypeSettings.options[isUserGM ? 0 : 1].value);
-  const selectedUserTypeName = computed(() => userTypeSettings.options.find(
+  });
+  const selectedUserTypeValue = ref(userTypeSettings.value.options[isUserGM ? 0 : 1].value);
+  const selectedUserTypeName = computed(() => userTypeSettings.value.options.find(
     (userType) => userType.value === selectedUserTypeValue.value,
   ).name);
   const isPlayerSelected = computed(
@@ -47,12 +47,12 @@ const TtxUseGeneralTooltipEditor = ({ computed, ref, watch }, store) => {
   /* === ACTOR TYPE === */
   const actorTypes = computed(() => store.getters['TtxStore/actorTypes']);
   const formattedActorTypes = computed(() => formattedFoundryArray(actorTypes.value, 'actorTypes'));
-  const actorTypeSetting = {
+  const actorTypeSetting = ref({
     id: ACTOR_TYPES.ID,
     name: ACTOR_TYPES.NAME(),
     hint: ACTOR_TYPES.HINT(),
     options: formattedActorTypes.value,
-  };
+  });
   const selectedActorValue = ref(DEFAULT_ACTOR_TYPE);
   const selectedActorName = computed(() => formattedActorTypes.value.find(
     (actorType) => actorType.value === selectedActorValue.value,

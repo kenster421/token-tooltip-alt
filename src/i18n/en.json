@@ -10,6 +10,9 @@
   "token-tooltip-next.settings.SETTINGS_EDITOR.name": "Settings editor",
   "token-tooltip-next.settings.SETTINGS_EDITOR.label": "Settings editor",
 
+  "token-tooltip-next.settings.SHOW_HINTS.name": "Show hints",
+  "token-tooltip-next.settings.SHOW_HINTS.hint": "Hide hints to make the settings more compact.",
+
   "token-tooltip-next.settings.SHOW_ONLY_WHILE_HOLDING_KEY.name": "Show tooltip when holding",
   "token-tooltip-next.settings.SHOW_ONLY_WHILE_HOLDING_KEY.hint": "Show tooltips only if the specified key is pressed. Leave empty to show tooltips all the time.",
 

@@ -2,7 +2,7 @@ import TtxUseSelectionTooltipEditor from '../composables/TtxUseSelectionTooltipE
 import { MODULE_NAME } from '../foundry-integration/TtxFoundryUtils.js';
 import { TtxStore } from '../store/TtxStore.js';
 
-const selectionTemplate = () => `
+const selectionTemplate = () => /* html */`
   <div class="form-group">
   <label>{{ userTypeSettings.name }}</label>
   <div class="form-fields">
@@ -16,7 +16,7 @@ const selectionTemplate = () => `
         </option>
     </select>
   </div>
-  <p class="notes">{{ userTypeSettings.hint }}</p>
+  <p v-if="showHints" class="notes">{{ userTypeSettings.hint }}</p>
   </div>
 
   <div class="form-group">
@@ -32,7 +32,7 @@ const selectionTemplate = () => `
           </option>
       </select>
     </div>
-    <p class="notes">{{ actorTypeSetting.hint }}</p>
+    <p v-if="showHints" class="notes">{{ actorTypeSetting.hint }}</p>
   </div>
 
   <div class="form-group">
@@ -48,16 +48,21 @@ const selectionTemplate = () => `
         </option>
     </select>
   </div>
-  <p class="notes">{{ dispositionSetting.hint }}</p>
+  <p v-if="showHints" class="notes">{{ dispositionSetting.hint }}</p>
   </div>
 `;
 
-const template = () => `
-  <h1>{{ selectionNames }}</h1>
-  <div :class="name('tooltip-preview-container')">
+const template = () => /* html */`
+  <nav :class="name('tooltip-editor-header')">
+    <span :class="name('tooltip-editor-title')">{{ selectionNames }}</span>
+    <div :class="name('tooltip-editor-transfer-button-container')"></div>
+  </nav>
+  <div :class="name('tooltip-editor-preview-container')">
   </div>
-  <div :class="['settings-list', name('tooltip-settings')]">
+  <div :class="['settings-list', name('tooltip-editor-selection')]">
     ${selectionTemplate()}
+  </div>
+  <div :class="['settings-list', name('tooltip-editor-settings')]">
   </div>
 `;
 
@@ -69,6 +74,7 @@ const config = () => ({
 
     const moduleName = ref(MODULE_NAME);
     const isUserGM = computed(() => store.getters['TtxStore/isUserGM']);
+    const showHints = computed(() => store.getters['TtxStore/showHints']);
     const globalTooltipSettings = computed(() => store.getters['TtxStore/globalTooltipSettings']);
     const ownedTooltipSettings = computed(() => store.getters['TtxStore/ownedTooltipSettings']);
 
@@ -91,6 +97,7 @@ const config = () => ({
     return {
       moduleName,
       isUserGM,
+      showHints,
       name,
       globalTooltipSettings,
       ownedTooltipSettings,

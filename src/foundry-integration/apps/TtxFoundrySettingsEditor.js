@@ -9,7 +9,6 @@ export default class TtxFoundrySettingsEditor extends FormApplication {
       ...super.defaultOptions,
       ...APPS.DEFAULT_VALUES,
       width: 535,
-      resizable: false,
       template: TEMPLATES.SETTINGS_EDITOR,
       id: `${MODULE_NAME}-settings-editor-app`,
     };
