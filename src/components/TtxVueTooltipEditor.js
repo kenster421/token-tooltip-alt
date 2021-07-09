@@ -1,5 +1,5 @@
 import TtxUseSelectionTooltipEditor from '../composables/TtxUseSelectionTooltipEditor.js';
-import { MODULE_NAME } from '../foundry-integration/TtxFoundryUtils.js';
+import { MODULE_NAME, i18n } from '../foundry-integration/TtxFoundryUtils.js';
 import { TtxStore } from '../store/TtxStore.js';
 
 const selectionTemplate = () => /* html */`
@@ -55,7 +55,16 @@ const selectionTemplate = () => /* html */`
 const template = () => /* html */`
   <nav :class="name('tooltip-editor-header')">
     <span :class="name('tooltip-editor-title')">{{ selectionNames }}</span>
-    <div :class="name('tooltip-editor-transfer-button-container')"></div>
+    <div :class="name('tooltip-editor-transfer-buttons-container')">
+      <button type="button" :class="name('tooltip-editor-copy-button')" :name="name('tooltip-editor-copy-button')">
+        <i class="fas fa-copy" />
+        <span>{{ i18n('settings.copy') }}</span>
+      </button>
+      <button :disabled="clipboard.empty" type="button" :class="name('tooltip-editor-paste-button')" :name="name('tooltip-editor-paste-button')">
+        <i class="fas fa-paste" />
+        <span>{{ i18n('settings.paste') }}</span>
+      </button>
+    </div>
   </nav>
   <div :class="name('tooltip-editor-preview-container')">
   </div>
@@ -77,6 +86,7 @@ const config = () => ({
     const showHints = computed(() => store.getters['TtxStore/showHints']);
     const globalTooltipSettings = computed(() => store.getters['TtxStore/globalTooltipSettings']);
     const ownedTooltipSettings = computed(() => store.getters['TtxStore/ownedTooltipSettings']);
+    const clipboard = computed(() => store.getters['TtxStore/clipboard']);
 
     const name = (originalName, separator = '-') => `${moduleName.value}${separator}${originalName}`;
 
@@ -112,6 +122,8 @@ const config = () => ({
       selectedUserTypeValue,
 
       selectionNames,
+      i18n,
+      clipboard,
     };
   },
 });

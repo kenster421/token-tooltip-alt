@@ -1,0 +1,25 @@
+.token-tooltip-next-tooltip-editor-header {
+  border-bottom: 2px solid #782e22;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  flex-direction: row;
+  width: inherit;
+  flex-wrap: nowrap;
+  flex-basis: auto;
+}
+
+.token-tooltip-next-tooltip-editor-title {
+  font-size: 1.5rem;
+}
+
+.token-tooltip-next-tooltip-editor-transfer-buttons-container {
+  font-size: 1.5rem;
+}
+.token-tooltip-next-tooltip-editor-transfer-buttons-container button {
+  width: auto;
+}
+
+.token-tooltip-next-tooltip-editor-preview-container {
+  height: 25rem;
+}/*# sourceMappingURL=ttx.css.map */

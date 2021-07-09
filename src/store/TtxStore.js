@@ -10,7 +10,7 @@ const initStore = () => {
     SHOW_HINTS, SHOW_ONLY_WHILE_HOLDING_KEY, SHOW_AFTER_DELAY, SHOW_ALL, SHOW_ALL_HIDDEN,
   } = SETTINGS_EDITOR_SETTINGS;
   const {
-    GLOBAL_TOOLTIP_SETTINGS, OWNED_TOOLTIP_SETTINGS, DEFAULT_ACTOR_TYPE,
+    GLOBAL_TOOLTIP_SETTINGS, OWNED_TOOLTIP_SETTINGS, DEFAULT_ACTOR_TYPE, CLIPBOARD,
   } = TOOLTIP_EDITOR_SETTINGS;
 
   TtxStore = Vuex.createStore({
@@ -32,6 +32,7 @@ const initStore = () => {
               ownedTooltipSettings: getSetting(OWNED_TOOLTIP_SETTINGS.ID),
               actorTypes: [DEFAULT_ACTOR_TYPE, ...(game.system?.entityTypes?.Actor || [])],
               dispositions: orderedDispositionsList(),
+              clipboard: getSetting(CLIPBOARD.ID),
             },
           };
         },
@@ -66,6 +67,9 @@ const initStore = () => {
           dispositions(state) {
             return state.tooltipEditor.dispositions;
           },
+          clipboard(state) {
+            return state.tooltipEditor.clipboard;
+          },
         },
         actions: {
           setShowHints({ commit }, showHints) {
@@ -96,6 +100,10 @@ const initStore = () => {
             asyncSetSetting(OWNED_TOOLTIP_SETTINGS.ID, ownedTooltipSettings)
               .then(() => commit('SET_OWNED_TOOLTIP_SETTINGS', ownedTooltipSettings));
           },
+          setClipboard({ commit }, clipboard) {
+            asyncSetSetting(CLIPBOARD.ID, clipboard)
+              .then(() => commit('SET_CLIPBOARD', clipboard));
+          },
         },
         mutations: {
           SET_SHOW_HINTS(state, showHints) {
@@ -118,6 +126,9 @@ const initStore = () => {
           },
           SET_OWNED_TOOLTIP_SETTINGS(state, ownedTooltipSettings) {
             state.tooltipEditor.ownedTooltipSettings = ownedTooltipSettings;
+          },
+          SET_CLIPBOARD(state, clipboard) {
+            state.tooltipEditor.clipboard = clipboard;
           },
         },
       },

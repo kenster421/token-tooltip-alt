@@ -80,7 +80,7 @@ const settingsEditorSettings = () => {
 
 const tooltipEditorSettings = () => {
   const { TOOLTIP_EDITOR_SETTINGS } = TTX_CONSTANTS.SETTING;
-  const { GLOBAL_TOOLTIP_SETTINGS, OWNED_TOOLTIP_SETTINGS } = TOOLTIP_EDITOR_SETTINGS;
+  const { GLOBAL_TOOLTIP_SETTINGS, OWNED_TOOLTIP_SETTINGS, CLIPBOARD } = TOOLTIP_EDITOR_SETTINGS;
 
   return [
     {
@@ -99,6 +99,15 @@ const tooltipEditorSettings = () => {
         restricted: OWNED_TOOLTIP_SETTINGS.RESTRICTED,
         default: OWNED_TOOLTIP_SETTINGS.DEFAULT,
         scope: OWNED_TOOLTIP_SETTINGS.SCOPE,
+      },
+    },
+    {
+      key: CLIPBOARD.ID,
+      settings: {
+        type: CLIPBOARD.FOUNDRY_TYPE,
+        restricted: CLIPBOARD.RESTRICTED,
+        default: CLIPBOARD.DEFAULT,
+        scope: CLIPBOARD.SCOPE,
       },
     },
   ];

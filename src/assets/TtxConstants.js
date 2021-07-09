@@ -124,6 +124,15 @@ const TTX_CONSTANTS = {
           },
         ],
       },
+      CLIPBOARD: {
+        ID: 'Clipboard',
+        RESTRICTED: false,
+        FOUNDRY_TYPE: Object,
+        SCOPE: 'client',
+        DEFAULT: {
+          empty: true,
+        },
+      },
       // determines if the tooltip should use the dark theme
       DARK_THEME: {},
       // determines where the tooltip will be positioned

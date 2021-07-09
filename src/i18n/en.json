@@ -40,6 +40,9 @@
   "token-tooltip-next.settings.USER_TYPES.name": "User type",
   "token-tooltip-next.settings.USER_TYPES.hint": "Pick the user type for which you want to edit the tooltip.",
 
+  "token-tooltip-next.settings.copy": "Copy",
+  "token-tooltip-next.settings.paste": "Paste",
+
 
 
 
