@@ -82,9 +82,8 @@ const TTX_CONSTANTS = {
         FOUNDRY_TYPE: Object,
         SCOPE: 'world',
         DEFAULT: {
-          gm: {},
-          user: {},
-          initialized: false,
+          gamemaster: {},
+          player: {},
         },
       },
       OWNED_TOOLTIP_SETTINGS: {
@@ -92,9 +91,7 @@ const TTX_CONSTANTS = {
         RESTRICTED: false,
         FOUNDRY_TYPE: Object,
         SCOPE: 'client',
-        DEFAULT: {
-          initialized: false,
-        },
+        DEFAULT: {},
       },
       ACTOR_TYPES: {
         ID: 'ActorTypes',
@@ -124,6 +121,13 @@ const TTX_CONSTANTS = {
           },
         ],
       },
+      TOOLTIP_EDITOR_LAYOUT: {
+        ID: 'TooltipEditorLayout',
+        RESTRICTED: false,
+        FOUNDRY_TYPE: Boolean,
+        SCOPE: 'client',
+        DEFAULT: true,
+      },
       CLIPBOARD: {
         ID: 'Clipboard',
         RESTRICTED: false,
@@ -133,16 +137,66 @@ const TTX_CONSTANTS = {
           empty: true,
         },
       },
-      // determines if the tooltip should use the dark theme
-      DARK_THEME: {},
-      // determines where the tooltip will be positioned
-      TOOLTIP_POSITION: {},
-      // between 1 and 2.5, ignored if tooltip position is overlay
+      USE_GAMEMASTER_SETTINGS: {
+        ID: 'useGamemasterSettings',
+        TYPE: 'boolean',
+        DEFAULT: true,
+        NAME() { return i18n('settings.USE_GAMEMASTER_SETTINGS.name'); },
+        HINT() { return i18n('settings.USE_GAMEMASTER_SETTINGS.hint'); },
+      },
+      USE_DEFAULT: {
+        ID: 'useDefault',
+        TYPE: 'boolean',
+        DEFAULT: true,
+        NAME() { return i18n('settings.USE_DEFAULT.name'); },
+        HINT() { return i18n('settings.USE_DEFAULT.hint'); },
+      },
+      DARK_THEME: {
+        ID: 'darkTheme',
+        TYPE: 'boolean',
+        DEFAULT: false,
+        NAME() { return i18n('settings.DARK_THEME.name'); },
+        HINT() { return i18n('settings.DARK_THEME.hint'); },
+      },
+      TOOLTIP_POSITION: {
+        ID: 'tooltipPosition',
+        TYPE: 'select',
+        DEFAULT: 'right',
+        NAME() { return i18n('settings.TOOLTIP_POSITION.name'); },
+        HINT() { return i18n('settings.TOOLTIP_POSITION.hint'); },
+        OPTIONS: [
+          {
+            value: 'top',
+            name() { return i18n('settings.TOOLTIP_POSITION.top'); },
+          },
+          {
+            value: 'right',
+            name() { return i18n('settings.TOOLTIP_POSITION.right'); },
+          },
+          {
+            value: 'bottom',
+            name() { return i18n('settings.TOOLTIP_POSITION.bottom'); },
+          },
+          {
+            value: 'left',
+            name() { return i18n('settings.TOOLTIP_POSITION.left'); },
+          },
+          {
+            value: 'overlay',
+            name() { return i18n('settings.TOOLTIP_POSITION.overlay'); },
+          },
+        ],
+      },
+      TOOLTIP_POSITION_DEFAULT: 'right',
+      // TODO: see if still necessary
       FONT_SIZE: {},
-      // the number of items per row, default 5, max 20
-      MAX_NUMBER_OF_ITEMS_PER_ROW: {},
-      // where the data for the tooltip is taken from
-      DATA_SOURCE: {},
+      DATA_SOURCE: {
+        ID: 'dataSource',
+        TYPE: 'string',
+        DEFAULT: 'actor.data.data',
+        NAME() { return i18n('settings.DATA_SOURCE.name'); },
+        HINT() { return i18n('settings.DATA_SOURCE.hint'); },
+      },
     },
     OTHER_SETTINGS: {
       MODULE_VERSION: {

@@ -1,16 +1,24 @@
 import { TTX_CONSTANTS } from '../assets/TtxConstants.js';
 import { getSetting, asyncSetSetting } from '../foundry-integration/TtxFoundrySettingsUtils.js';
-import { orderedDispositionsList } from '../foundry-integration/TtxFoundryUtils.js';
+import { log, orderedDispositionsList } from '../foundry-integration/TtxFoundryUtils.js';
 
 let TtxStore;
 
 const initStore = () => {
   const { SETTINGS_EDITOR_SETTINGS, TOOLTIP_EDITOR_SETTINGS } = TTX_CONSTANTS.SETTING;
   const {
-    SHOW_HINTS, SHOW_ONLY_WHILE_HOLDING_KEY, SHOW_AFTER_DELAY, SHOW_ALL, SHOW_ALL_HIDDEN,
+    SHOW_HINTS,
+    SHOW_ONLY_WHILE_HOLDING_KEY,
+    SHOW_AFTER_DELAY,
+    SHOW_ALL,
+    SHOW_ALL_HIDDEN,
   } = SETTINGS_EDITOR_SETTINGS;
   const {
-    GLOBAL_TOOLTIP_SETTINGS, OWNED_TOOLTIP_SETTINGS, DEFAULT_ACTOR_TYPE, CLIPBOARD,
+    GLOBAL_TOOLTIP_SETTINGS,
+    OWNED_TOOLTIP_SETTINGS,
+    DEFAULT_ACTOR_TYPE,
+    CLIPBOARD,
+    TOOLTIP_EDITOR_LAYOUT,
   } = TOOLTIP_EDITOR_SETTINGS;
 
   TtxStore = Vuex.createStore({
@@ -33,6 +41,7 @@ const initStore = () => {
               actorTypes: [DEFAULT_ACTOR_TYPE, ...(game.system?.entityTypes?.Actor || [])],
               dispositions: orderedDispositionsList(),
               clipboard: getSetting(CLIPBOARD.ID),
+              layout: getSetting(TOOLTIP_EDITOR_LAYOUT.ID),
             },
           };
         },
@@ -70,6 +79,9 @@ const initStore = () => {
           clipboard(state) {
             return state.tooltipEditor.clipboard;
           },
+          tooltipEditorLayout(state) {
+            return state.tooltipEditor.layout;
+          },
         },
         actions: {
           setShowHints({ commit }, showHints) {
@@ -104,6 +116,10 @@ const initStore = () => {
             asyncSetSetting(CLIPBOARD.ID, clipboard)
               .then(() => commit('SET_CLIPBOARD', clipboard));
           },
+          setTooltipEditorLayout({ commit }, layout) {
+            asyncSetSetting(TOOLTIP_EDITOR_LAYOUT.ID, layout)
+              .then(() => commit('SET_TOOLTIP_EDITOR_LAYOUT', layout));
+          },
         },
         mutations: {
           SET_SHOW_HINTS(state, showHints) {
@@ -123,12 +139,16 @@ const initStore = () => {
           },
           SET_GLOBAL_TOOLTIP_SETTINGS(state, globalTooltipSettings) {
             state.tooltipEditor.globalTooltipSettings = globalTooltipSettings;
+            log(state.tooltipEditor.globalTooltipSettings);
           },
           SET_OWNED_TOOLTIP_SETTINGS(state, ownedTooltipSettings) {
             state.tooltipEditor.ownedTooltipSettings = ownedTooltipSettings;
           },
           SET_CLIPBOARD(state, clipboard) {
             state.tooltipEditor.clipboard = clipboard;
+          },
+          SET_TOOLTIP_EDITOR_LAYOUT(state, layout) {
+            state.tooltipEditor.layout = layout;
           },
         },
       },

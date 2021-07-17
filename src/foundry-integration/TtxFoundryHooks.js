@@ -25,6 +25,7 @@ const hookHandlers = {
           initStore();
           // TODO: REMOVE
           new TtxFoundryTooltipEditor().render(true);
+          // CONFIG.debug.hooks = true;
         }),
       ),
     );

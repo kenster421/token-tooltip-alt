@@ -3,7 +3,7 @@ import {
   i18n, capitalize, MODULE_NAME,
 } from '../foundry-integration/TtxFoundryUtils.js';
 
-const TtxUseGeneralTooltipEditor = ({ computed, ref, watch }, store) => {
+const TtxUseGeneralTooltipEditor = ({ computed, ref, watch }, store, { isUserGM }) => {
   const { TOOLTIP_EDITOR_SETTINGS } = TTX_CONSTANTS.SETTING;
   const {
     ACTOR_TYPES,
@@ -14,7 +14,6 @@ const TtxUseGeneralTooltipEditor = ({ computed, ref, watch }, store) => {
     OWNED_DISPOSITION,
   } = TOOLTIP_EDITOR_SETTINGS;
 
-  const isUserGM = computed(() => store.getters['TtxStore/isUserGM']);
   const formattedFoundryArray = (values, i18nPrefix) => values.reduce((prev, value) => {
     const translatedValue = i18n(`${i18nPrefix}.${value}`);
     const formattedValue = {
@@ -32,7 +31,7 @@ const TtxUseGeneralTooltipEditor = ({ computed, ref, watch }, store) => {
     hint: USER_TYPES.HINT(),
     options: USER_TYPES.OPTIONS.map((option) => ({ ...option, name: option.name() })),
   });
-  const selectedUserTypeValue = ref(userTypeSettings.value.options[isUserGM ? 0 : 1].value);
+  const selectedUserTypeValue = ref(userTypeSettings.value.options[isUserGM.value ? 0 : 1].value);
   const selectedUserTypeName = computed(() => userTypeSettings.value.options.find(
     (userType) => userType.value === selectedUserTypeValue.value,
   ).name);
@@ -62,7 +61,7 @@ const TtxUseGeneralTooltipEditor = ({ computed, ref, watch }, store) => {
   /* === DISPOSITION === */
   const dispositions = computed(() => {
     const foundryDispositions = store.getters['TtxStore/dispositions'];
-    return isPlayerSelected.value
+    return isPlayerSelected.value || !isUserGM.value
       ? [OWNED_DISPOSITION, ...foundryDispositions]
       : foundryDispositions;
   });
@@ -73,7 +72,7 @@ const TtxUseGeneralTooltipEditor = ({ computed, ref, watch }, store) => {
     hint: DISPOSITIONS.HINT(),
     options: formattedDispositions.value,
   }));
-  const selectedDispositionValue = ref(DEFAULT_DISPOSITION);
+  const selectedDispositionValue = ref(isUserGM.value ? DEFAULT_DISPOSITION : OWNED_DISPOSITION);
   const selectedDispositionName = computed(() => formattedDispositions.value.find(
     (disposition) => disposition.value === selectedDispositionValue.value,
   ).name);

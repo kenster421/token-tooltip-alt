@@ -37,11 +37,30 @@
   "token-tooltip-next.settings.DISPOSITIONS.name": "Actor disposition",
   "token-tooltip-next.settings.DISPOSITIONS.hint": "Pick the actor disposition for which you want to edit the tooltip.",
 
+  "token-tooltip-next.settings.USE_GAMEMASTER_SETTINGS.name": "Use gamemaster settings",
+  "token-tooltip-next.settings.USE_GAMEMASTER_SETTINGS.hint": "Use the settings defined by the gamemaster.",
+
+  "token-tooltip-next.settings.USE_DEFAULT.name": "Use default settings",
+  "token-tooltip-next.settings.USE_DEFAULT.hint": "Use the settings defined for the default actor type.",
+
+  "token-tooltip-next.settings.DARK_THEME.name": "Dark theme",
+  "token-tooltip-next.settings.DARK_THEME.hint": "Use the dark transparent theme for the tooltips",
+
+  "token-tooltip-next.settings.DATA_SOURCE.name": "Data source",
+  "token-tooltip-next.settings.DATA_SOURCE.hint": "This is an advanced feature, please don't change it if you don't know what you are doing. This will determine from where the tooltip data is pulled.",
+
+  "token-tooltip-next.settings.FONT_SIZE.name": "Font size",
+  "token-tooltip-next.settings.FONT_SIZE.hint": "Customize the tooltip's font size between 1 and 2.5 rem.",
+
+  "token-tooltip-next.settings.TOOLTIP_POSITION.name": "Tooltip placement",
+  "token-tooltip-next.settings.TOOLTIP_POSITION.hint": "Determine the tooltip's position.",
+  
   "token-tooltip-next.settings.USER_TYPES.name": "User type",
   "token-tooltip-next.settings.USER_TYPES.hint": "Pick the user type for which you want to edit the tooltip.",
 
   "token-tooltip-next.settings.copy": "Copy",
   "token-tooltip-next.settings.paste": "Paste",
+  "token-tooltip-next.settings.layout": "Layout",
 
 
 
@@ -67,5 +86,11 @@
   "token-tooltip-next.actorTypes.default": "Default",
   "token-tooltip-next.actorTypes.character": "Character",
   "token-tooltip-next.actorTypes.npc": "NPC",
-  "token-tooltip-next.actorTypes.vehicle": "Vehicle"
+  "token-tooltip-next.actorTypes.vehicle": "Vehicle",
+
+  "token-tooltip-next.settings.TOOLTIP_POSITION.overlay": "Overlay",
+  "token-tooltip-next.settings.TOOLTIP_POSITION.top": "Top",
+  "token-tooltip-next.settings.TOOLTIP_POSITION.right": "Right",
+  "token-tooltip-next.settings.TOOLTIP_POSITION.bottom": "Bottom",
+  "token-tooltip-next.settings.TOOLTIP_POSITION.left": "Left"
 }

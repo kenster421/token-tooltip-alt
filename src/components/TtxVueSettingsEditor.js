@@ -3,7 +3,7 @@ import { TTX_CONSTANTS } from '../assets/TtxConstants.js';
 import { TtxStore } from '../store/TtxStore.js';
 import TtxFoundryTooltipEditor from '../foundry-integration/apps/TtxFoundryTooltipEditor.js';
 
-const template = () => /* html */`
+const template = /* html */`
   <div class="settings-list">
     <div class="form-group submenu">
       <label>{{ tooltipEditor.name }}</label>
@@ -55,7 +55,7 @@ const template = () => /* html */`
 `;
 
 const config = () => ({
-  template: template(),
+  template,
   setup() {
     const { SETTINGS_EDITOR_SETTINGS, TOOLTIP_EDITOR } = TTX_CONSTANTS.SETTING;
     const {
