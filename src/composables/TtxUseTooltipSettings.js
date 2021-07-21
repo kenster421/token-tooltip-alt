@@ -90,7 +90,7 @@ const TtxUseTooltipSettings = ({ computed }, store, { selectionValues, userTypeS
     store.dispatch(storeAction, settings);
   };
 
-  const useGM = computed(() => {
+  const useGMSettings = computed(() => {
     if (isUserGM.value) return false;
 
     const useGMSettings = currentSettings.value?.[USE_GAMEMASTER_SETTINGS.ID];
@@ -100,14 +100,18 @@ const TtxUseTooltipSettings = ({ computed }, store, { selectionValues, userTypeS
     return currentSettings.value[USE_GAMEMASTER_SETTINGS.ID];
   });
 
-  const isDefault = computed(() => {
+  const useDefaultSettings = computed(() => {
     const useDefault = currentSettings.value?.[USE_DEFAULT.ID];
     if (useDefault !== undefined) return useDefault;
+
+    const { selectedActorValue } = selectionValues.value;
   });
 
   return {
     currentSettings,
     setSetting,
+    useGMSettings,
+    useDefaultSettings,
   };
 };
 
