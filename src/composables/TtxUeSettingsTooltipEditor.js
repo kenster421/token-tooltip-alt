@@ -16,7 +16,6 @@ const TtxUeSettingsTooltipEditor = (
     DARK_THEME,
     TOOLTIP_POSITION,
     DATA_SOURCE,
-    TOOLTIP_POSITION_DEFAULT,
     DEFAULT_ACTOR_TYPE,
   } = TOOLTIP_EDITOR_SETTINGS;
 
@@ -63,15 +62,15 @@ const TtxUeSettingsTooltipEditor = (
 
     const userSettings = isUserGM.value ? settings[selectedUserTypeValue] : settings;
 
-    userSettings[selectedActorValue] = {
-      ...(userSettings[selectedActorValue] || {}),
-      [selectedDispositionValue]: {
-        ...(userSettings[selectedActorValue]?.[selectedDispositionValue] || {}),
-        [settingName]: settingValue,
-      },
-    };
+    // userSettings[selectedActorValue] = {
+    //   ...(userSettings[selectedActorValue] || {}),
+    //   [selectedDispositionValue]: {
+    //     ...(userSettings[selectedActorValue]?.[selectedDispositionValue] || {}),
+    //     [settingName]: settingValue,
+    //   },
+    // };
 
-    store.dispatch(`TtxStore/${isUserGM.value ? 'setGlobalTooltipSettings' : 'setOwnedTooltipSettings'}`, settings);
+    // store.dispatch(`TtxStore/${isUserGM.value ? 'setGlobalTooltipSettings' : 'setOwnedTooltipSettings'}`, settings);
   };
 
   const isUseDefaultSettingsSet = computed(() => {
@@ -83,7 +82,7 @@ const TtxUeSettingsTooltipEditor = (
       USE_DEFAULT.ID,
       selectedActorValue === DEFAULT_ACTOR_TYPE ? false : USE_DEFAULT.DEFAULT,
     );
-    return getCurrentTooltipSettings.value[USE_DEFAULT.ID];
+    return getCurrentTooltipSettings.value?.[USE_DEFAULT.ID];
   });
   const isUseGamemasterSettingsSet = computed(() => {
     const useGamemasterSettings = getCurrentTooltipSettings.value?.[USE_GAMEMASTER_SETTINGS.ID];
@@ -93,7 +92,7 @@ const TtxUeSettingsTooltipEditor = (
       USE_GAMEMASTER_SETTINGS.ID,
       isUserGM.value ? false : USE_GAMEMASTER_SETTINGS.DEFAULT,
     );
-    return getCurrentTooltipSettings.value[USE_GAMEMASTER_SETTINGS.ID];
+    return getCurrentTooltipSettings.value?.[USE_GAMEMASTER_SETTINGS.ID];
   });
 
   const getSettingSource = computed(() => {

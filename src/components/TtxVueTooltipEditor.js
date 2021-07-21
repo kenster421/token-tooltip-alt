@@ -1,5 +1,7 @@
 import TtxUeSettingsTooltipEditor from '../composables/TtxUeSettingsTooltipEditor.js';
 import TtxUseSelectionTooltipEditor from '../composables/TtxUseSelectionTooltipEditor.js';
+import TtxUseTooltipSettings from '../composables/TtxUseTooltipSettings.js';
+
 import { MODULE_NAME, i18n } from '../foundry-integration/TtxFoundryUtils.js';
 import { TtxStore } from '../store/TtxStore.js';
 
@@ -97,7 +99,6 @@ const generalSettingsTemplate = /* html */ `
   <p v-if="showHints" class="notes">{{ generalSetting.hint }}</p>
   </div>
 `;
-
 const template = /* html */`
   <div :class="[name('tooltip-editor-inner'), tooltipEditorLayoutClass]">
     <nav :class="name('tooltip-editor-header')">
@@ -167,6 +168,13 @@ const config = () => ({
       selectedActorValue: selectedActorValue.value,
       selectedDispositionValue: selectedDispositionValue.value,
     }));
+
+    const {
+      currentSettings,
+    } = TtxUseTooltipSettings(Vue, store, {
+      selectionValues,
+      userTypeSettings,
+    });
 
     const {
       tooltipEditorLayout,

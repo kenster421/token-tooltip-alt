@@ -84,6 +84,7 @@ const TTX_CONSTANTS = {
         DEFAULT: {
           gamemaster: {},
           player: {},
+          initialized: false,
         },
       },
       OWNED_TOOLTIP_SETTINGS: {
@@ -196,6 +197,10 @@ const TTX_CONSTANTS = {
         DEFAULT: 'actor.data.data',
         NAME() { return i18n('settings.DATA_SOURCE.name'); },
         HINT() { return i18n('settings.DATA_SOURCE.hint'); },
+      },
+      ITEMS: {
+        ID: 'items',
+        DEFAULT: [],
       },
     },
     OTHER_SETTINGS: {
